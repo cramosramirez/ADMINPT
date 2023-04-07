@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{09DFF1A1-4AC0-4741-B017-5FE42648F6C7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ADMINPT.DL</RootNamespace>
+    <AssemblyName>ADMINPT_DL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.78\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.ExceptionManagement">
+      <HintPath>..\Microsoft.ApplicationBlocks.ExceptionManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entidades\CLIENTE.cs" />
+    <Compile Include="Entidades\CONCEPTO_MOVI.cs" />
+    <Compile Include="Entidades\CONTROL_TRASLADO.cs" />
+    <Compile Include="Entidades\DIA_ZAFRA.cs" />
+    <Compile Include="Entidades\DOCTO_DETA.cs" />
+    <Compile Include="Entidades\DOCTO_ENCA.cs" />
+    <Compile Include="Entidades\DOCUMENTO_ANULADO.cs" />
+    <Compile Include="Entidades\DOCUMENTO_NUMERACION.cs" />
+    <Compile Include="Entidades\ENTRADA_SALIDA_DETA.cs" />
+    <Compile Include="Entidades\ENTRADA_SALIDA_ENCA.cs" />
+    <Compile Include="Entidades\ESPECI_MOV.cs" />
+    <Compile Include="Entidades\ESTADO_MOVIMIENTOS.cs" />
+    <Compile Include="Entidades\EXISTENCIA.cs" />
+    <Compile Include="Entidades\FAMILIA.cs" />
+    <Compile Include="Entidades\KARDEX.cs" />
+    <Compile Include="Entidades\MARCA.cs" />
+    <Compile Include="Entidades\MOVIMIENTO_DETA.cs" />
+    <Compile Include="Entidades\MOVIMIENTO_ENCA.cs" />
+    <Compile Include="Entidades\OpcionBarra.cs" />
+    <Compile Include="Entidades\ORDEN_GLOBAL_SALDO.cs" />
+    <Compile Include="Entidades\ORDEN_GLOBAL_TRAS.cs" />
+    <Compile Include="Entidades\PRESENTACION_TRAS.cs" />
+    <Compile Include="Entidades\PRESENTACION_VTA.cs" />
+    <Compile Include="Entidades\PRODUCTO.cs" />
+    <Compile Include="Entidades\PRODUCTO_PRES_TRAS.cs" />
+    <Compile Include="Entidades\PRODUCTO_PRES_VTA.cs" />
+    <Compile Include="Entidades\PROVEEDOR_TRAS.cs" />
+    <Compile Include="Entidades\SOLICITANTE.cs" />
+    <Compile Include="Entidades\TIPO_CONCEPTO.cs" />
+    <Compile Include="Entidades\TIPO_CONCEPTO_PROD.cs" />
+    <Compile Include="Entidades\TIPO_MOVIMIENTO.cs" />
+    <Compile Include="Entidades\TIPO_PRODUCTO.cs" />
+    <Compile Include="Entidades\TIPO_REF_TRAS.cs" />
+    <Compile Include="Entidades\TRANSPORTE.cs" />
+    <Compile Include="Entidades\TURNO.cs" />
+    <Compile Include="Entidades\UNIDAD_MEDI_CONSAA.cs" />
+    <Compile Include="Entidades\UNIDAD_MEDI_FAC.cs" />
+    <Compile Include="Entidades\ZAFRA.cs" />
+    <Compile Include="Modelo\DbBase.cs" />
+    <Compile Include="Modelo\DbBODEGA.cs" />
+    <Compile Include="Entidades\BODEGA.cs" />
+    <Compile Include="Modelo\DbCLIENTE.cs" />
+    <Compile Include="Modelo\DbCONCEPTO_MOVI.cs" />
+    <Compile Include="Modelo\DbCONTROL_TRASLADO.cs" />
+    <Compile Include="Modelo\DbDIA_ZAFRA.cs" />
+    <Compile Include="Modelo\DbDOCTO_DETA.cs" />
+    <Compile Include="Modelo\DbDOCTO_ENCA.cs" />
+    <Compile Include="Modelo\DbDOCUMENTO_ANULADO.cs" />
+    <Compile Include="Modelo\DbDOCUMENTO_NUMERACION.cs" />
+    <Compile Include="Modelo\DbENTRADA_SALIDA_DETA.cs" />
+    <Compile Include="Modelo\DbENTRADA_SALIDA_ENCA.cs" />
+    <Compile Include="Modelo\DbESPECI_MOV.cs" />
+    <Compile Include="Modelo\DbESTADO_MOVIMIENTOS.cs" />
+    <Compile Include="Modelo\DbEXISTENCIA.cs" />
+    <Compile Include="Modelo\DbFAMILIA.cs" />
+    <Compile Include="Modelo\DbKARDEX.cs" />
+    <Compile Include="Modelo\DbMARCA.cs" />
+    <Compile Include="Modelo\DbMOVIMIENTO_DETA.cs" />
+    <Compile Include="Modelo\DbMOVIMIENTO_ENCA.cs" />
+    <Compile Include="Modelo\DbORDEN_GLOBAL_SALDO.cs" />
+    <Compile Include="Modelo\DbORDEN_GLOBAL_TRAS.cs" />
+    <Compile Include="Modelo\DbPRESENTACION_TRAS.cs" />
+    <Compile Include="Modelo\DbPRESENTACION_VTA.cs" />
+    <Compile Include="Modelo\DbPRODUCTO.cs" />
+    <Compile Include="Modelo\DbPRODUCTO_PRES_TRAS.cs" />
+    <Compile Include="Modelo\DbPRODUCTO_PRES_VTA.cs" />
+    <Compile Include="Modelo\DbPROVEEDOR_TRAS.cs" />
+    <Compile Include="Modelo\DbSOLICITANTE.cs" />
+    <Compile Include="Modelo\DbTIPO_CONCEPTO.cs" />
+    <Compile Include="Modelo\DbTIPO_CONCEPTO_PROD.cs" />
+    <Compile Include="Modelo\DbTIPO_MOVIMIENTO.cs" />
+    <Compile Include="Modelo\DbTIPO_PRODUCTO.cs" />
+    <Compile Include="Modelo\DbTIPO_REF_TRAS.cs" />
+    <Compile Include="Modelo\DbTRANSPORTE.cs" />
+    <Compile Include="Modelo\DbTURNO.cs" />
+    <Compile Include="Modelo\DbUNIDAD_MEDI_CONSAA.cs" />
+    <Compile Include="Modelo\DbUNIDAD_MEDI_FAC.cs" />
+    <Compile Include="Modelo\DbZAFRA.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

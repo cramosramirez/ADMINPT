@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CAFEF220-A9ED-4AF5-8DBD-558DEC44ADB7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ADMINPT.BL</RootNamespace>
+    <AssemblyName>ADMINPT_BL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ApplicationBlocks.ExceptionManagement">
+      <HintPath>..\Microsoft.ApplicationBlocks.ExceptionManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CBODEGA.cs" />
+    <Compile Include="CCLIENTE.cs" />
+    <Compile Include="CCONCEPTO_MOVI.cs" />
+    <Compile Include="CCONTROL_TRASLADO.cs" />
+    <Compile Include="CDIA_ZAFRA.cs" />
+    <Compile Include="CDOCTO_DETA.cs" />
+    <Compile Include="CDOCTO_ENCA.cs" />
+    <Compile Include="CENTRADA_SALIDA_DETA.cs" />
+    <Compile Include="CENTRADA_SALIDA_ENCA.cs" />
+    <Compile Include="CESPECI_MOV.cs" />
+    <Compile Include="CEXISTENCIA.cs" />
+    <Compile Include="CFAMILIA.cs" />
+    <Compile Include="CKARDEX.cs" />
+    <Compile Include="CMARCA.cs" />
+    <Compile Include="CMOVIMIENTO_DETA.cs" />
+    <Compile Include="CMOVIMIENTO_ENCA.cs" />
+    <Compile Include="CORDEN_GLOBAL_SALDO.cs" />
+    <Compile Include="CORDEN_GLOBAL_TRAS.cs" />
+    <Compile Include="CPRESENTACION_TRAS.cs" />
+    <Compile Include="CPRESENTACION_VTA.cs" />
+    <Compile Include="CPRODUCTO.cs" />
+    <Compile Include="CPRODUCTO_PRES_TRAS.cs" />
+    <Compile Include="CPRODUCTO_PRES_VTA.cs" />
+    <Compile Include="CPROVEEDOR_TRAS.cs" />
+    <Compile Include="CSOLICITANTE.cs" />
+    <Compile Include="CTIPO_CONCEPTO.cs" />
+    <Compile Include="CTIPO_CONCEPTO_PROD.cs" />
+    <Compile Include="CTIPO_MOVIMIENTO.cs" />
+    <Compile Include="CTIPO_PRODUCTO.cs" />
+    <Compile Include="CTIPO_REF_TRAS.cs" />
+    <Compile Include="CTRANSPORTE.cs" />
+    <Compile Include="CTURNO.cs" />
+    <Compile Include="CUNIDAD_MEDI_FAC.cs" />
+    <Compile Include="CUTILERIAS.cs" />
+    <Compile Include="CZAFRA.cs" />
+    <Compile Include="ESTADO_MOVIMIENTOS.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CUNIDAD_MEDI_CONSAA.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ADMINPT_DL\ADMINPT_DL.csproj">
+      <Project>{09dff1a1-4ac0-4741-b017-5fe42648f6c7}</Project>
+      <Name>ADMINPT_DL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

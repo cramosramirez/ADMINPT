@@ -1,0 +1,114 @@
+﻿.contenedorLogin {
+    width: 100%;
+    height: 70px;
+    padding-top: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 7px;
+    font-size: small;
+    border-radius: 7px;
+    border: 1px solid #999999;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-box-shadow: 0px 1px 2px rgba(000,000,000,0.5), inset 0px 1px 0px rgba(255,255,255,1);
+    -webkit-box-shadow: 0px 1px 2px rgba(000,000,000,0.5), inset 0px 0px 0px rgba(255,255,255,1);
+    box-shadow: 0px 1px 2px rgba(000,000,000,0.5), inset 0px 1px 0px rgba(255,255,255,1);
+}
+
+.EncabezadoSecciones {
+    font-size: 16px;
+    color: #3333CC;
+    font-family: Calibri;
+}
+
+.center {
+    text-align: center;
+    padding: 10px;
+}
+
+.tablaVista {
+    border-spacing: 4px;
+    border-collapse: separate;
+}
+
+
+.filaVista {
+    padding: 4px;
+    width: 100px;
+}
+
+
+.title {
+    float: left;
+    padding: 1px 4px 2px;
+    font-size: 1.5em;
+}
+.tb {
+    /*margin-top: 100px;*/
+    /*margin-bottom: 10px;*/
+
+    margin: auto;
+}
+
+.td {
+    padding-left: 1em;
+    text-align: right;
+    font: normal .80em arial, sans-serif;
+}
+.carrito {
+    
+}
+.modal-content {
+    /*    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.5);*/
+    /*    box-shadow: 0 5px 15px rgba(0,0,0,0.5);*/
+  /*  margin: auto;
+    vertical-align:central;*/
+    
+}
+
+.expandedPanel .title {
+    display: none;
+}
+
+.mainMenu {
+    float: right !important;
+    margin: 8px 0 4px;
+}
+
+.expandedPanel .mainMenu {
+    width: 100%;
+}
+
+.grid,
+.grid .dxgvHSDC,
+.grid .dxgvCSD {
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.colComandoGrid{
+    width: 40px;
+    text-align: center;     
+}
+
+.divResponsiveTabla {
+    overflow-x: auto;
+}
+table {
+    border-collapse: collapse;
+}
+.MyTextBox .dxeErrorCellSys {
+    position: relative;
+}
+
+    .MyTextBox .dxeErrorCellSys img {
+        position: absolute;
+        top: 4px;
+        right: 18px;
+    }
+
+.wrapfly {
+    white-space: normal;
+    word-wrap: break-word;
+} 

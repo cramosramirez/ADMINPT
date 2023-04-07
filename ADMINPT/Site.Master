@@ -1,0 +1,150 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="ADMINPT.Site1" %>
+
+<%@ Register assembly="DevExpress.Web.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web" tagprefix="dx" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title> 
+    <link href="css/ResponsiveLayout.css" rel="stylesheet" />
+    <link href="Content/sweetalert.css" rel="stylesheet" />
+    <script src="Scripts/sweetalert.js"></script>
+    <script src="Scripts/sweetalert.min.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 99%;
+        }
+
+        .auto-style2 {
+            height: 39px;
+            width: 1362px;
+        }
+
+        .auto-style5 {
+            float: right;
+            height: 25px;
+            width: 662px;
+        }
+    </style>
+</head>
+<body style="margin: 0px 20px 10px 10px; background-color:transparent" onkeydown = "return (event.keyCode!=13)">
+    <form id="form1" runat="server">      
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+<%--                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />--%>
+<%--                <asp:ScriptReference Name="WebFormsBundle" />--%>
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+            <div class="contenedorLogin">  
+                <table style="width:100%">
+                    <tr>
+                        <td  align="left" style="width:25%">
+                            
+          <asp:Image ID="Image1" runat="server" ImageUrl="~/imagenes/imagenApp.png" AlternateText=""  Width="50px" Height="38px"/>             
+            <asp:Label ID="lbtt" runat="server" Text="ADMIN-PT" Font-Bold="true"></asp:Label> 
+            
+                        </td>
+                        <td align="center" style="width:50%">
+                            <asp:Label ID="Label1" runat="server" Text="SISTEMA DE ADMINISTRACION DE PRODUCTO TERMINADO" Font-Size="Medium" Font-Bold="true"></asp:Label> 
+                        </td>
+                        <td style=" position:center; width:25%">
+                            
+              <table style=" width:100%;" class="auto-style5">
+                        <tbody>
+                            <tr>
+                                 <td colspan="1" align="left">
+                                    <asp:Label ID="lb_iduser" runat="server"  Visible="false"></asp:Label>
+                                </td>
+                                <td colspan="1" align="left">
+                                    <asp:Label ID="lb_idemp" runat="server" visble="false"></asp:Label>
+                                </td>
+                                <td  style="float:right"> 
+                                     <asp:UpdatePanel runat="server">
+            <Triggers>
+            </Triggers>
+            <ContentTemplate>
+                <button type="button" id="btfacturado" name="btfacturado" runat="server"  visible="false"  class="btn btn-primary">
+  Facturado <span class="badge badge-light"><asp:Label ID="lblFact" CssClass="ticketLabel" Text="0" runat="server" Visible="true"></asp:Label></span>
+</button> <br />
+                
+                <button type="button"  id="btprocesocarga" name="btprocesocarga" runat="server" visible="false" class="btn btn-primary">
+  En Proceso Carga <span class="badge badge-light"><asp:Label ID="lblEnproc" CssClass="ticketLabel" Text="0" runat="server" Visible="true"></asp:Label></span>
+</button>
+            </ContentTemplate>
+        </asp:UpdatePanel>  
+                                </td>
+
+                         <td colspan="1" align="left">
+ <asp:Label ID="Lb_user" runat="server" Visible="false" Font-Bold="true" ForeColor="Black" ></asp:Label>
+                         </td>
+                           
+                                                             <td colspan="1" align="left">
+
+                                    <asp:label Text="[" ForeColor="black" runat="server"></asp:label>
+                                                                 <asp:HyperLink ID="hl_inicio" runat="server" NavigateUrl="~/Login.aspx" Font-Bold="True"> Iniciar Sesion</asp:HyperLink>
+
+                                    
+                                    <asp:LinkButton ID="hl_fin" runat="server" Visible="false" Font-Bold="True" OnClick="hl_fin_Click">Finalizar Sesion</asp:LinkButton>
+<asp:label Text="]" ForeColor="black" runat="server"></asp:label>
+                                </td>
+                            
+
+                                </tr>
+                        </tbody>
+                    </table>
+              
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">  
+                                                  
+                             <dx:ASPxMenu ID="mMain"  runat="server" BorderBetweenItemAndSubMenu="HideRootOnly" EnableViewState="false"
+                     EnableClientSideAPI="true" AutoSeparators="None" ShowSubMenuShadow="true" ItemImagePosition="Right" GutterWidth="0px"
+                     ShowPopOutImages="True"  Theme="Default"></dx:ASPxMenu> 
+           
+                        </td>
+                    </tr>
+                </table>
+           </div>
+                <br/>   
+       <div class="modal-content">
+ <asp:ContentPlaceHolder ID="contenido" runat="server">    
+            </asp:ContentPlaceHolder>   
+              
+          <%--  <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>--%>
+     
+           <%-- <footer>--%>
+               <%-- <p>&copy; <%: DateTime.Now.Year %> <dx:ASPxLabel ID="Lb_Direcc" runat="server" Text="" style="font-size:large; font-weight: bold; color:black; "></dx:ASPxLabel></p>
+                  --%>               
+                <%--</footer>--%>  
+   
+             </div>      
+        <asp:SqlDataSource ID="sqd_listmenu" runat="server" ConnectionString="<%$ ConnectionStrings:cn %>" SelectCommand="VIEW_INICIOSESIONMENU" SelectCommandType="StoredProcedure">
+                           <SelectParameters>
+                                 <asp:ControlParameter ControlID="lb_idemp" Name="ID_EMPRESA" PropertyName="Text" Type="Int32" />
+                                <asp:ControlParameter ControlID="lb_iduser" Name="ID_MENUPERFIL" PropertyName="Text" Type="Int32" />
+                                <asp:SessionParameter Name="ID_BODEP" SessionField="ID_BODEP" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>     
+    </form>
+</body>
+</html>

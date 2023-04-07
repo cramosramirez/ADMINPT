@@ -1,0 +1,934 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A3EB3A14-DD63-40C7-AC9A-4A921F21C5EA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ADMINPT</RootNamespace>
+    <AssemblyName>ADMINPT</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44393</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v20.1.Core, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v20.1.Core, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxThemes.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.Resources.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ApplicationBlocks.Data">
+      <HintPath>..\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.ExceptionManagement, Version=2.0.0.0, Culture=neutral, PublicKeyToken=090ce9b8f6fec061">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Microsoft.ApplicationBlocks.ExceptionManagement.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces">
+      <HintPath>..\Microsoft.ApplicationBlocks.ExceptionManagement.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="controles\bodega\UcListaBODEGA.ascx" />
+    <Content Include="controles\bodega\UcMantBODEGA.ascx" />
+    <Content Include="controles\bodega\UcVistaBODEGA.ascx" />
+    <Content Include="controles\estado_movimientos\UcListaESTADO_MOVIMIENTOS.ascx" />
+    <Content Include="controles\estado_movimientos\UcMantESTADO_MOVIMIENTOS.ascx" />
+    <Content Include="controles\estado_movimientos\UcVistaESTADO_MOVIMIENTOS.ascx" />
+    <Content Include="controles\familia\UCListaFAMILIA.ascx" />
+    <Content Include="controles\familia\UCMantFAMILIA.ascx" />
+    <Content Include="controles\familia\UCVistaFAMILIA.ascx" />
+    <Content Include="controles\kardex\UcListaKARDEX.ascx" />
+    <Content Include="controles\kardex\UcMantKARDEX.ascx" />
+    <Content Include="controles\kardex\UcVistaKARDEX.ascx" />
+    <Content Include="controles\marca\UcListaMARCA.ascx" />
+    <Content Include="controles\marca\UcMantMARCA.ascx" />
+    <Content Include="controles\marca\UcVistaMARCA.ascx" />
+    <Content Include="controles\movimiento\UcListaENTRADA_SALIDA_DETA.ascx" />
+    <Content Include="controles\movimiento\UcListaENTRADA_SALIDA_ENCA.ascx" />
+    <Content Include="controles\movimiento\UcMantENTRADA_SALIDA.ascx" />
+    <Content Include="controles\movimiento\UcVistaENTRADA_SALIDA_ENCA.ascx" />
+    <Content Include="controles\orden_global_saldo\UcListaORDEN_GLOBAL_SALDO.ascx" />
+    <Content Include="controles\orden_global_saldo\UcMantORDEN_GLOBAL_SALDO.ascx" />
+    <Content Include="controles\orden_global_saldo\UcVistaORDEN_GLOBAL_SALDO.ascx" />
+    <Content Include="controles\orden_global_tras\UCListaORDEN_GLOBAL_TRAS.ascx" />
+    <Content Include="controles\orden_global_tras\UCMantORDEN_GLOBAL_TRAS.ascx" />
+    <Content Include="controles\orden_global_tras\UCVistaORDEN_GLOBAL_TRAS.ascx" />
+    <Content Include="controles\presentacion_tras\UCListaPRESENTACION_TRAS.ascx" />
+    <Content Include="controles\presentacion_tras\UCMantPRESENTACION_TRAS.ascx" />
+    <Content Include="controles\presentacion_tras\UCVistaPRESENTACION_TRAS.ascx" />
+    <Content Include="controles\presentacion_vta\UcListaPRESENTACION_VTA.ascx" />
+    <Content Include="controles\presentacion_vta\UcMantPRESENTACION_VTA.ascx" />
+    <Content Include="controles\presentacion_vta\UcVistaPRESENTACION_VTA.ascx" />
+    <Content Include="controles\producto\UcListaPRODUCTO.ascx" />
+    <Content Include="controles\producto\UcMantPRODUCTO.ascx" />
+    <Content Include="controles\producto\UcVistaPRODUCTO.ascx" />
+    <Content Include="controles\producto_pres_tras\UcListaPRODUCTO_PRES_TRAS.ascx" />
+    <Content Include="controles\producto_pres_tras\UcMantPRODUCTO_PRES_TRAS.ascx" />
+    <Content Include="controles\producto_pres_tras\UcVistaPRODUCTO_PRES_TRAS.ascx" />
+    <Content Include="controles\producto_pres_vta\UcListaPRODUCTO_PRES_VTA.ascx" />
+    <Content Include="controles\producto_pres_vta\UcMantPRODUCTO_PRES_VTA.ascx" />
+    <Content Include="controles\producto_pres_vta\UcVistaPRODUCTO_PRES_VTA.ascx" />
+    <Content Include="controles\proveedor_tras\UcListaPROVEEDOR_TRAS.ascx" />
+    <Content Include="controles\proveedor_tras\UcMantPROVEEDOR_TRAS.ascx" />
+    <Content Include="controles\proveedor_tras\UcVistaPROVEEDOR_TRAS.ascx" />
+    <Content Include="controles\solicitante\UcListaSOLICITANTE.ascx" />
+    <Content Include="controles\solicitante\UcMantSOLICITANTE.ascx" />
+    <Content Include="controles\solicitante\UcVistaSOLICITANTE.ascx" />
+    <Content Include="controles\tipo_concepto\UcListaTIPO_CONCEPTO.ascx" />
+    <Content Include="controles\tipo_concepto\UcMantTIPO_CONCEPTO.ascx" />
+    <Content Include="controles\tipo_concepto\UcVistaTIPO_CONCEPTO.ascx" />
+    <Content Include="controles\tipo_concepto_prod\UcListaTIPO_CONCEPTO_PROD.ascx" />
+    <Content Include="controles\tipo_concepto_prod\UcMantTIPO_CONCEPTO_PROD.ascx" />
+    <Content Include="controles\tipo_concepto_prod\UcVistaTIPO_CONCEPTO_PROD.ascx" />
+    <Content Include="controles\tipo_producto\UcListaTIPO_PRODUCTO.ascx" />
+    <Content Include="controles\tipo_producto\UcMantTIPO_PRODUCTO.ascx" />
+    <Content Include="controles\tipo_producto\UcVistaTIPO_PRODUCTO.ascx" />
+    <Content Include="controles\tipo_ref_tras\UcListaTIPO_REF_TRAS.ascx" />
+    <Content Include="controles\tipo_ref_tras\UcMantTIPO_REF_TRAS.ascx" />
+    <Content Include="controles\tipo_ref_tras\UcVistaTIPO_REF_TRAS.ascx" />
+    <Content Include="controles\transporte\UcListaTRANSPORTE.ascx" />
+    <Content Include="controles\transporte\UcMantTRANSPORTE.ascx" />
+    <Content Include="controles\transporte\UcVistaTRANSPORTE.ascx" />
+    <Content Include="controles\transporte\turno\UcListaTURNO.ascx" />
+    <Content Include="controles\transporte\turno\UcMantTURNO.ascx" />
+    <Content Include="controles\transporte\turno\UcVistaTURNO.ascx" />
+    <Content Include="controles\UCBarraOpciones.ascx" />
+    <Content Include="controles\UCEncabezado.ascx" />
+    <Content Include="controles\unidad_medi_consaa\UCListaUNIDAD_MEDI_CONSAA.ascx" />
+    <Content Include="controles\unidad_medi_consaa\UCMantUNIDAD_MEDI_CONSAA.ascx" />
+    <Content Include="controles\unidad_medi_consaa\UCVistaUNIDAD_MEDI_CONSAA.ascx" />
+    <Content Include="controles\unidad_medi_fac\UCListaUNIDAD_MEDI_FAC.ascx" />
+    <Content Include="controles\unidad_medi_fac\UCMantUNIDAD_MEDI_FAC.ascx" />
+    <Content Include="controles\unidad_medi_fac\UCVistaUNIDAD_MEDI_FAC.ascx" />
+    <Content Include="Default.aspx" />
+    <Content Include="forms\wfBODEGA.aspx" />
+    <Content Include="forms\wfESTADO_MOVIMIENTOS.aspx" />
+    <Content Include="forms\wfFAMILIA.aspx" />
+    <Content Include="forms\wfKARDEX.aspx" />
+    <Content Include="forms\wfMantENTRADA_SALIDA.aspx" />
+    <Content Include="forms\wfMARCA.aspx" />
+    <Content Include="forms\wfORDEN_GLOBAL_SALDO.aspx" />
+    <Content Include="forms\wfORDEN_GLOBAL_TRAS.aspx" />
+    <Content Include="forms\wfPRESENTACION_TRAS.aspx" />
+    <Content Include="forms\wfPRESENTACION_VTA.aspx" />
+    <Content Include="forms\wfPRODUCTO.aspx" />
+    <Content Include="forms\wfPRODUCTO_PRES_TRAS.aspx" />
+    <Content Include="forms\wfPRODUCTO_PRES_VTA.aspx" />
+    <Content Include="forms\wfPROVEEDOR_TRAS.aspx" />
+    <Content Include="forms\wfSOLICITANTE.aspx" />
+    <Content Include="forms\wfTIPO_CONCEPTO.aspx" />
+    <Content Include="forms\wfTIPO_CONCEPTO_PROD.aspx" />
+    <Content Include="forms\wfTIPO_PRODUCTO.aspx" />
+    <Content Include="forms\wfTIPO_REF_TRAS.aspx" />
+    <Content Include="forms\wfTRANSPORTE.aspx" />
+    <Content Include="forms\wfTURNO.aspx" />
+    <Content Include="forms\wfUNIDAD_MEDI_CONSAA.aspx" />
+    <Content Include="forms\wfUNIDAD_MEDI_FAC.aspx" />
+    <Content Include="imagenes\Editar.png" />
+    <Content Include="imagenes\Eliminar.png" />
+    <Content Include="imagenes\fondo_menu.png" />
+    <Content Include="imagenes\imagenApp.png" />
+    <Content Include="css\ResponsiveLayout.css" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Code\cENT_SAL_PRODcache.cs" />
+    <Compile Include="controles\bodega\UcListaBODEGA.ascx.cs">
+      <DependentUpon>UcListaBODEGA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\bodega\UcListaBODEGA.ascx.designer.cs">
+      <DependentUpon>UcListaBODEGA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\bodega\UcMantBODEGA.ascx.cs">
+      <DependentUpon>UcMantBODEGA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\bodega\UcMantBODEGA.ascx.designer.cs">
+      <DependentUpon>UcMantBODEGA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\bodega\UcVistaBODEGA.ascx.cs">
+      <DependentUpon>UcVistaBODEGA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\bodega\UcVistaBODEGA.ascx.designer.cs">
+      <DependentUpon>UcVistaBODEGA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\estado_movimientos\UcListaESTADO_MOVIMIENTOS.ascx.cs">
+      <DependentUpon>UcListaESTADO_MOVIMIENTOS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\estado_movimientos\UcListaESTADO_MOVIMIENTOS.ascx.designer.cs">
+      <DependentUpon>UcListaESTADO_MOVIMIENTOS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\estado_movimientos\UcMantESTADO_MOVIMIENTOS.ascx.cs">
+      <DependentUpon>UcMantESTADO_MOVIMIENTOS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\estado_movimientos\UcMantESTADO_MOVIMIENTOS.ascx.designer.cs">
+      <DependentUpon>UcMantESTADO_MOVIMIENTOS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\estado_movimientos\UcVistaESTADO_MOVIMIENTOS.ascx.cs">
+      <DependentUpon>UcVistaESTADO_MOVIMIENTOS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\estado_movimientos\UcVistaESTADO_MOVIMIENTOS.ascx.designer.cs">
+      <DependentUpon>UcVistaESTADO_MOVIMIENTOS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\familia\UCListaFAMILIA.ascx.cs">
+      <DependentUpon>UCListaFAMILIA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\familia\UCListaFAMILIA.ascx.designer.cs">
+      <DependentUpon>UCListaFAMILIA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\familia\UCMantFAMILIA.ascx.cs">
+      <DependentUpon>UCMantFAMILIA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\familia\UCMantFAMILIA.ascx.designer.cs">
+      <DependentUpon>UCMantFAMILIA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\familia\UCVistaFAMILIA.ascx.cs">
+      <DependentUpon>UCVistaFAMILIA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\familia\UCVistaFAMILIA.ascx.designer.cs">
+      <DependentUpon>UCVistaFAMILIA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\kardex\UcListaKARDEX.ascx.cs">
+      <DependentUpon>UcListaKARDEX.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\kardex\UcListaKARDEX.ascx.designer.cs">
+      <DependentUpon>UcListaKARDEX.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\kardex\UcMantKARDEX.ascx.cs">
+      <DependentUpon>UcMantKARDEX.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\kardex\UcMantKARDEX.ascx.designer.cs">
+      <DependentUpon>UcMantKARDEX.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\kardex\UcVistaKARDEX.ascx.cs">
+      <DependentUpon>UcVistaKARDEX.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\kardex\UcVistaKARDEX.ascx.designer.cs">
+      <DependentUpon>UcVistaKARDEX.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\marca\UcListaMARCA.ascx.cs">
+      <DependentUpon>UcListaMARCA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\marca\UcListaMARCA.ascx.designer.cs">
+      <DependentUpon>UcListaMARCA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\marca\UcMantMARCA.ascx.cs">
+      <DependentUpon>UcMantMARCA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\marca\UcMantMARCA.ascx.designer.cs">
+      <DependentUpon>UcMantMARCA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\marca\UcVistaMARCA.ascx.cs">
+      <DependentUpon>UcVistaMARCA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\marca\UcVistaMARCA.ascx.designer.cs">
+      <DependentUpon>UcVistaMARCA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\movimiento\UcListaENTRADA_SALIDA_DETA.ascx.cs">
+      <DependentUpon>UcListaENTRADA_SALIDA_DETA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\movimiento\UcListaENTRADA_SALIDA_DETA.ascx.designer.cs">
+      <DependentUpon>UcListaENTRADA_SALIDA_DETA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\movimiento\UcListaENTRADA_SALIDA_ENCA.ascx.cs">
+      <DependentUpon>UcListaENTRADA_SALIDA_ENCA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\movimiento\UcListaENTRADA_SALIDA_ENCA.ascx.designer.cs">
+      <DependentUpon>UcListaENTRADA_SALIDA_ENCA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\movimiento\UcMantENTRADA_SALIDA.ascx.cs">
+      <DependentUpon>UcMantENTRADA_SALIDA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\movimiento\UcMantENTRADA_SALIDA.ascx.designer.cs">
+      <DependentUpon>UcMantENTRADA_SALIDA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\movimiento\UcVistaENTRADA_SALIDA_ENCA.ascx.cs">
+      <DependentUpon>UcVistaENTRADA_SALIDA_ENCA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\movimiento\UcVistaENTRADA_SALIDA_ENCA.ascx.designer.cs">
+      <DependentUpon>UcVistaENTRADA_SALIDA_ENCA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\orden_global_saldo\UcListaORDEN_GLOBAL_SALDO.ascx.cs">
+      <DependentUpon>UcListaORDEN_GLOBAL_SALDO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\orden_global_saldo\UcListaORDEN_GLOBAL_SALDO.ascx.designer.cs">
+      <DependentUpon>UcListaORDEN_GLOBAL_SALDO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\orden_global_saldo\UcMantORDEN_GLOBAL_SALDO.ascx.cs">
+      <DependentUpon>UcMantORDEN_GLOBAL_SALDO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\orden_global_saldo\UcMantORDEN_GLOBAL_SALDO.ascx.designer.cs">
+      <DependentUpon>UcMantORDEN_GLOBAL_SALDO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\orden_global_saldo\UcVistaORDEN_GLOBAL_SALDO.ascx.cs">
+      <DependentUpon>UcVistaORDEN_GLOBAL_SALDO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\orden_global_saldo\UcVistaORDEN_GLOBAL_SALDO.ascx.designer.cs">
+      <DependentUpon>UcVistaORDEN_GLOBAL_SALDO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\orden_global_tras\UCListaORDEN_GLOBAL_TRAS.ascx.cs">
+      <DependentUpon>UCListaORDEN_GLOBAL_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\orden_global_tras\UCListaORDEN_GLOBAL_TRAS.ascx.designer.cs">
+      <DependentUpon>UCListaORDEN_GLOBAL_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\orden_global_tras\UCMantORDEN_GLOBAL_TRAS.ascx.cs">
+      <DependentUpon>UCMantORDEN_GLOBAL_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\orden_global_tras\UCMantORDEN_GLOBAL_TRAS.ascx.designer.cs">
+      <DependentUpon>UCMantORDEN_GLOBAL_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\orden_global_tras\UCVistaORDEN_GLOBAL_TRAS.ascx.cs">
+      <DependentUpon>UCVistaORDEN_GLOBAL_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\orden_global_tras\UCVistaORDEN_GLOBAL_TRAS.ascx.designer.cs">
+      <DependentUpon>UCVistaORDEN_GLOBAL_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\presentacion_tras\UCListaPRESENTACION_TRAS.ascx.cs">
+      <DependentUpon>UCListaPRESENTACION_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\presentacion_tras\UCListaPRESENTACION_TRAS.ascx.designer.cs">
+      <DependentUpon>UCListaPRESENTACION_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\presentacion_tras\UCMantPRESENTACION_TRAS.ascx.cs">
+      <DependentUpon>UCMantPRESENTACION_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\presentacion_tras\UCMantPRESENTACION_TRAS.ascx.designer.cs">
+      <DependentUpon>UCMantPRESENTACION_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\presentacion_tras\UCVistaPRESENTACION_TRAS.ascx.cs">
+      <DependentUpon>UCVistaPRESENTACION_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\presentacion_tras\UCVistaPRESENTACION_TRAS.ascx.designer.cs">
+      <DependentUpon>UCVistaPRESENTACION_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\presentacion_vta\UcListaPRESENTACION_VTA.ascx.cs">
+      <DependentUpon>UcListaPRESENTACION_VTA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\presentacion_vta\UcListaPRESENTACION_VTA.ascx.designer.cs">
+      <DependentUpon>UcListaPRESENTACION_VTA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\presentacion_vta\UcMantPRESENTACION_VTA.ascx.cs">
+      <DependentUpon>UcMantPRESENTACION_VTA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\presentacion_vta\UcMantPRESENTACION_VTA.ascx.designer.cs">
+      <DependentUpon>UcMantPRESENTACION_VTA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\presentacion_vta\UcVistaPRESENTACION_VTA.ascx.cs">
+      <DependentUpon>UcVistaPRESENTACION_VTA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\presentacion_vta\UcVistaPRESENTACION_VTA.ascx.designer.cs">
+      <DependentUpon>UcVistaPRESENTACION_VTA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\producto\UcListaPRODUCTO.ascx.cs">
+      <DependentUpon>UcListaPRODUCTO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\producto\UcListaPRODUCTO.ascx.designer.cs">
+      <DependentUpon>UcListaPRODUCTO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\producto\UcMantPRODUCTO.ascx.cs">
+      <DependentUpon>UcMantPRODUCTO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\producto\UcMantPRODUCTO.ascx.designer.cs">
+      <DependentUpon>UcMantPRODUCTO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\producto\UcVistaPRODUCTO.ascx.cs">
+      <DependentUpon>UcVistaPRODUCTO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\producto\UcVistaPRODUCTO.ascx.designer.cs">
+      <DependentUpon>UcVistaPRODUCTO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\producto_pres_tras\UcListaPRODUCTO_PRES_TRAS.ascx.cs">
+      <DependentUpon>UcListaPRODUCTO_PRES_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\producto_pres_tras\UcListaPRODUCTO_PRES_TRAS.ascx.designer.cs">
+      <DependentUpon>UcListaPRODUCTO_PRES_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\producto_pres_tras\UcMantPRODUCTO_PRES_TRAS.ascx.cs">
+      <DependentUpon>UcMantPRODUCTO_PRES_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\producto_pres_tras\UcMantPRODUCTO_PRES_TRAS.ascx.designer.cs">
+      <DependentUpon>UcMantPRODUCTO_PRES_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\producto_pres_tras\UcVistaPRODUCTO_PRES_TRAS.ascx.cs">
+      <DependentUpon>UcVistaPRODUCTO_PRES_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\producto_pres_tras\UcVistaPRODUCTO_PRES_TRAS.ascx.designer.cs">
+      <DependentUpon>UcVistaPRODUCTO_PRES_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\producto_pres_vta\UcListaPRODUCTO_PRES_VTA.ascx.cs">
+      <DependentUpon>UcListaPRODUCTO_PRES_VTA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\producto_pres_vta\UcListaPRODUCTO_PRES_VTA.ascx.designer.cs">
+      <DependentUpon>UcListaPRODUCTO_PRES_VTA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\producto_pres_vta\UcMantPRODUCTO_PRES_VTA.ascx.cs">
+      <DependentUpon>UcMantPRODUCTO_PRES_VTA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\producto_pres_vta\UcMantPRODUCTO_PRES_VTA.ascx.designer.cs">
+      <DependentUpon>UcMantPRODUCTO_PRES_VTA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\producto_pres_vta\UcVistaPRODUCTO_PRES_VTA.ascx.cs">
+      <DependentUpon>UcVistaPRODUCTO_PRES_VTA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\producto_pres_vta\UcVistaPRODUCTO_PRES_VTA.ascx.designer.cs">
+      <DependentUpon>UcVistaPRODUCTO_PRES_VTA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\proveedor_tras\UcListaPROVEEDOR_TRAS.ascx.cs">
+      <DependentUpon>UcListaPROVEEDOR_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\proveedor_tras\UcListaPROVEEDOR_TRAS.ascx.designer.cs">
+      <DependentUpon>UcListaPROVEEDOR_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\proveedor_tras\UcMantPROVEEDOR_TRAS.ascx.cs">
+      <DependentUpon>UcMantPROVEEDOR_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\proveedor_tras\UcMantPROVEEDOR_TRAS.ascx.designer.cs">
+      <DependentUpon>UcMantPROVEEDOR_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\proveedor_tras\UcVistaPROVEEDOR_TRAS.ascx.cs">
+      <DependentUpon>UcVistaPROVEEDOR_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\proveedor_tras\UcVistaPROVEEDOR_TRAS.ascx.designer.cs">
+      <DependentUpon>UcVistaPROVEEDOR_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\solicitante\UcListaSOLICITANTE.ascx.cs">
+      <DependentUpon>UcListaSOLICITANTE.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\solicitante\UcListaSOLICITANTE.ascx.designer.cs">
+      <DependentUpon>UcListaSOLICITANTE.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\solicitante\UcMantSOLICITANTE.ascx.cs">
+      <DependentUpon>UcMantSOLICITANTE.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\solicitante\UcMantSOLICITANTE.ascx.designer.cs">
+      <DependentUpon>UcMantSOLICITANTE.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\solicitante\UcVistaSOLICITANTE.ascx.cs">
+      <DependentUpon>UcVistaSOLICITANTE.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\solicitante\UcVistaSOLICITANTE.ascx.designer.cs">
+      <DependentUpon>UcVistaSOLICITANTE.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_concepto\UcListaTIPO_CONCEPTO.ascx.cs">
+      <DependentUpon>UcListaTIPO_CONCEPTO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_concepto\UcListaTIPO_CONCEPTO.ascx.designer.cs">
+      <DependentUpon>UcListaTIPO_CONCEPTO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_concepto\UcMantTIPO_CONCEPTO.ascx.cs">
+      <DependentUpon>UcMantTIPO_CONCEPTO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_concepto\UcMantTIPO_CONCEPTO.ascx.designer.cs">
+      <DependentUpon>UcMantTIPO_CONCEPTO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_concepto\UcVistaTIPO_CONCEPTO.ascx.cs">
+      <DependentUpon>UcVistaTIPO_CONCEPTO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_concepto\UcVistaTIPO_CONCEPTO.ascx.designer.cs">
+      <DependentUpon>UcVistaTIPO_CONCEPTO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_concepto_prod\UcListaTIPO_CONCEPTO_PROD.ascx.cs">
+      <DependentUpon>UcListaTIPO_CONCEPTO_PROD.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_concepto_prod\UcListaTIPO_CONCEPTO_PROD.ascx.designer.cs">
+      <DependentUpon>UcListaTIPO_CONCEPTO_PROD.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_concepto_prod\UcMantTIPO_CONCEPTO_PROD.ascx.cs">
+      <DependentUpon>UcMantTIPO_CONCEPTO_PROD.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_concepto_prod\UcMantTIPO_CONCEPTO_PROD.ascx.designer.cs">
+      <DependentUpon>UcMantTIPO_CONCEPTO_PROD.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_concepto_prod\UcVistaTIPO_CONCEPTO_PROD.ascx.cs">
+      <DependentUpon>UcVistaTIPO_CONCEPTO_PROD.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_concepto_prod\UcVistaTIPO_CONCEPTO_PROD.ascx.designer.cs">
+      <DependentUpon>UcVistaTIPO_CONCEPTO_PROD.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_producto\UcListaTIPO_PRODUCTO.ascx.cs">
+      <DependentUpon>UcListaTIPO_PRODUCTO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_producto\UcListaTIPO_PRODUCTO.ascx.designer.cs">
+      <DependentUpon>UcListaTIPO_PRODUCTO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_producto\UcMantTIPO_PRODUCTO.ascx.cs">
+      <DependentUpon>UcMantTIPO_PRODUCTO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_producto\UcMantTIPO_PRODUCTO.ascx.designer.cs">
+      <DependentUpon>UcMantTIPO_PRODUCTO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_producto\UcVistaTIPO_PRODUCTO.ascx.cs">
+      <DependentUpon>UcVistaTIPO_PRODUCTO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_producto\UcVistaTIPO_PRODUCTO.ascx.designer.cs">
+      <DependentUpon>UcVistaTIPO_PRODUCTO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_ref_tras\UcListaTIPO_REF_TRAS.ascx.cs">
+      <DependentUpon>UcListaTIPO_REF_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_ref_tras\UcListaTIPO_REF_TRAS.ascx.designer.cs">
+      <DependentUpon>UcListaTIPO_REF_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_ref_tras\UcMantTIPO_REF_TRAS.ascx.cs">
+      <DependentUpon>UcMantTIPO_REF_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_ref_tras\UcMantTIPO_REF_TRAS.ascx.designer.cs">
+      <DependentUpon>UcMantTIPO_REF_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\tipo_ref_tras\UcVistaTIPO_REF_TRAS.ascx.cs">
+      <DependentUpon>UcVistaTIPO_REF_TRAS.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\tipo_ref_tras\UcVistaTIPO_REF_TRAS.ascx.designer.cs">
+      <DependentUpon>UcVistaTIPO_REF_TRAS.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\transporte\UcListaTRANSPORTE.ascx.cs">
+      <DependentUpon>UcListaTRANSPORTE.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\transporte\UcListaTRANSPORTE.ascx.designer.cs">
+      <DependentUpon>UcListaTRANSPORTE.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\transporte\UcMantTRANSPORTE.ascx.cs">
+      <DependentUpon>UcMantTRANSPORTE.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\transporte\UcMantTRANSPORTE.ascx.designer.cs">
+      <DependentUpon>UcMantTRANSPORTE.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\transporte\UcVistaTRANSPORTE.ascx.cs">
+      <DependentUpon>UcVistaTRANSPORTE.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\transporte\UcVistaTRANSPORTE.ascx.designer.cs">
+      <DependentUpon>UcVistaTRANSPORTE.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\transporte\turno\UcListaTURNO.ascx.cs">
+      <DependentUpon>UcListaTURNO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\transporte\turno\UcListaTURNO.ascx.designer.cs">
+      <DependentUpon>UcListaTURNO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\transporte\turno\UcMantTURNO.ascx.cs">
+      <DependentUpon>UcMantTURNO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\transporte\turno\UcMantTURNO.ascx.designer.cs">
+      <DependentUpon>UcMantTURNO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\transporte\turno\UcVistaTURNO.ascx.cs">
+      <DependentUpon>UcVistaTURNO.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\transporte\turno\UcVistaTURNO.ascx.designer.cs">
+      <DependentUpon>UcVistaTURNO.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\UCBarraOpciones.ascx.cs">
+      <DependentUpon>UCBarraOpciones.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\UCBarraOpciones.ascx.designer.cs">
+      <DependentUpon>UCBarraOpciones.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\UCEncabezado.ascx.cs">
+      <DependentUpon>UCEncabezado.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\UCEncabezado.ascx.designer.cs">
+      <DependentUpon>UCEncabezado.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\unidad_medi_consaa\UCListaUNIDAD_MEDI_CONSAA.ascx.cs">
+      <DependentUpon>UCListaUNIDAD_MEDI_CONSAA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\unidad_medi_consaa\UCListaUNIDAD_MEDI_CONSAA.ascx.designer.cs">
+      <DependentUpon>UCListaUNIDAD_MEDI_CONSAA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\unidad_medi_consaa\UCMantUNIDAD_MEDI_CONSAA.ascx.cs">
+      <DependentUpon>UCMantUNIDAD_MEDI_CONSAA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\unidad_medi_consaa\UCMantUNIDAD_MEDI_CONSAA.ascx.designer.cs">
+      <DependentUpon>UCMantUNIDAD_MEDI_CONSAA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\unidad_medi_consaa\UCVistaUNIDAD_MEDI_CONSAA.ascx.cs">
+      <DependentUpon>UCVistaUNIDAD_MEDI_CONSAA.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\unidad_medi_consaa\UCVistaUNIDAD_MEDI_CONSAA.ascx.designer.cs">
+      <DependentUpon>UCVistaUNIDAD_MEDI_CONSAA.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\unidad_medi_fac\UCListaUNIDAD_MEDI_FAC.ascx.cs">
+      <DependentUpon>UCListaUNIDAD_MEDI_FAC.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\unidad_medi_fac\UCListaUNIDAD_MEDI_FAC.ascx.designer.cs">
+      <DependentUpon>UCListaUNIDAD_MEDI_FAC.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\unidad_medi_fac\UCMantUNIDAD_MEDI_FAC.ascx.cs">
+      <DependentUpon>UCMantUNIDAD_MEDI_FAC.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\unidad_medi_fac\UCMantUNIDAD_MEDI_FAC.ascx.designer.cs">
+      <DependentUpon>UCMantUNIDAD_MEDI_FAC.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\unidad_medi_fac\UCVistaUNIDAD_MEDI_FAC.ascx.cs">
+      <DependentUpon>UCVistaUNIDAD_MEDI_FAC.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\unidad_medi_fac\UCVistaUNIDAD_MEDI_FAC.ascx.designer.cs">
+      <DependentUpon>UCVistaUNIDAD_MEDI_FAC.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfBODEGA.aspx.cs">
+      <DependentUpon>wfBODEGA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfBODEGA.aspx.designer.cs">
+      <DependentUpon>wfBODEGA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfESTADO_MOVIMIENTOS.aspx.cs">
+      <DependentUpon>wfESTADO_MOVIMIENTOS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfESTADO_MOVIMIENTOS.aspx.designer.cs">
+      <DependentUpon>wfESTADO_MOVIMIENTOS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfFAMILIA.aspx.cs">
+      <DependentUpon>wfFAMILIA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfFAMILIA.aspx.designer.cs">
+      <DependentUpon>wfFAMILIA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfKARDEX.aspx.cs">
+      <DependentUpon>wfKARDEX.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfKARDEX.aspx.designer.cs">
+      <DependentUpon>wfKARDEX.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfMantENTRADA_SALIDA.aspx.cs">
+      <DependentUpon>wfMantENTRADA_SALIDA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfMantENTRADA_SALIDA.aspx.designer.cs">
+      <DependentUpon>wfMantENTRADA_SALIDA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfMARCA.aspx.cs">
+      <DependentUpon>wfMARCA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfMARCA.aspx.designer.cs">
+      <DependentUpon>wfMARCA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfORDEN_GLOBAL_SALDO.aspx.cs">
+      <DependentUpon>wfORDEN_GLOBAL_SALDO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfORDEN_GLOBAL_SALDO.aspx.designer.cs">
+      <DependentUpon>wfORDEN_GLOBAL_SALDO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfORDEN_GLOBAL_TRAS.aspx.cs">
+      <DependentUpon>wfORDEN_GLOBAL_TRAS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfORDEN_GLOBAL_TRAS.aspx.designer.cs">
+      <DependentUpon>wfORDEN_GLOBAL_TRAS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfPRESENTACION_TRAS.aspx.cs">
+      <DependentUpon>wfPRESENTACION_TRAS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfPRESENTACION_TRAS.aspx.designer.cs">
+      <DependentUpon>wfPRESENTACION_TRAS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfPRESENTACION_VTA.aspx.cs">
+      <DependentUpon>wfPRESENTACION_VTA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfPRESENTACION_VTA.aspx.designer.cs">
+      <DependentUpon>wfPRESENTACION_VTA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfPRODUCTO.aspx.cs">
+      <DependentUpon>wfPRODUCTO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfPRODUCTO.aspx.designer.cs">
+      <DependentUpon>wfPRODUCTO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfPRODUCTO_PRES_TRAS.aspx.cs">
+      <DependentUpon>wfPRODUCTO_PRES_TRAS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfPRODUCTO_PRES_TRAS.aspx.designer.cs">
+      <DependentUpon>wfPRODUCTO_PRES_TRAS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfPRODUCTO_PRES_VTA.aspx.cs">
+      <DependentUpon>wfPRODUCTO_PRES_VTA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfPRODUCTO_PRES_VTA.aspx.designer.cs">
+      <DependentUpon>wfPRODUCTO_PRES_VTA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfPROVEEDOR_TRAS.aspx.cs">
+      <DependentUpon>wfPROVEEDOR_TRAS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfPROVEEDOR_TRAS.aspx.designer.cs">
+      <DependentUpon>wfPROVEEDOR_TRAS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfSOLICITANTE.aspx.cs">
+      <DependentUpon>wfSOLICITANTE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfSOLICITANTE.aspx.designer.cs">
+      <DependentUpon>wfSOLICITANTE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfTIPO_CONCEPTO.aspx.cs">
+      <DependentUpon>wfTIPO_CONCEPTO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfTIPO_CONCEPTO.aspx.designer.cs">
+      <DependentUpon>wfTIPO_CONCEPTO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfTIPO_CONCEPTO_PROD.aspx.cs">
+      <DependentUpon>wfTIPO_CONCEPTO_PROD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfTIPO_CONCEPTO_PROD.aspx.designer.cs">
+      <DependentUpon>wfTIPO_CONCEPTO_PROD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfTIPO_PRODUCTO.aspx.cs">
+      <DependentUpon>wfTIPO_PRODUCTO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfTIPO_PRODUCTO.aspx.designer.cs">
+      <DependentUpon>wfTIPO_PRODUCTO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfTIPO_REF_TRAS.aspx.cs">
+      <DependentUpon>wfTIPO_REF_TRAS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfTIPO_REF_TRAS.aspx.designer.cs">
+      <DependentUpon>wfTIPO_REF_TRAS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfTRANSPORTE.aspx.cs">
+      <DependentUpon>wfTRANSPORTE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfTRANSPORTE.aspx.designer.cs">
+      <DependentUpon>wfTRANSPORTE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfTURNO.aspx.cs">
+      <DependentUpon>wfTURNO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfTURNO.aspx.designer.cs">
+      <DependentUpon>wfTURNO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfUNIDAD_MEDI_CONSAA.aspx.cs">
+      <DependentUpon>wfUNIDAD_MEDI_CONSAA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfUNIDAD_MEDI_CONSAA.aspx.designer.cs">
+      <DependentUpon>wfUNIDAD_MEDI_CONSAA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms\wfUNIDAD_MEDI_FAC.aspx.cs">
+      <DependentUpon>wfUNIDAD_MEDI_FAC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms\wfUNIDAD_MEDI_FAC.aspx.designer.cs">
+      <DependentUpon>wfUNIDAD_MEDI_FAC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Site.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ADMINPT_BL\ADMINPT_BL.csproj">
+      <Project>{cafef220-a9ed-4af5-8dbd-558dec44adb7}</Project>
+      <Name>ADMINPT_BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADMINPT_DL\ADMINPT_DL.csproj">
+      <Project>{09dff1a1-4ac0-4741-b017-5fe42648f6c7}</Project>
+      <Name>ADMINPT_DL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51384</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44393/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

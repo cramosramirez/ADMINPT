@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A10F5098-C98A-4305-A84A-916167461193}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ADMINPTWIN</RootNamespace>
+    <AssemblyName>ADMINPTWIN</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Aplicaciones\AdminptWin\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://192.168.1.4/adminptwin/</InstallUrl>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>116</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ADMINPTWIN.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>16CF2ADE69E91C1501955A472F38AD16202DA7D1</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ADMINPTWIN_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo4.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v20.1.Core, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.Desktop.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v20.1.Core, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v20.1.Core, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v20.1.Core, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v20.1.Core, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v20.1.Core, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v20.1.Export, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v20.1.Core, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v20.1.UI, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v20.1.Core, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v20.1.Extensions, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v20.1, Version=20.1.13.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bascula\BasculaProduccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bascula\BasculaProduccion.Designer.cs">
+      <DependentUpon>BasculaProduccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bascula\CorrecionBascula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bascula\CorrecionBascula.Designer.cs">
+      <DependentUpon>CorrecionBascula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bascula\Bascula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bascula\Bascula.Designer.cs">
+      <DependentUpon>Bascula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bascula\Movientos_Bascula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bascula\Movientos_Bascula.Designer.cs">
+      <DependentUpon>Movientos_Bascula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CDatos.cs" />
+    <Compile Include="Cnn.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginInfo.cs" />
+    <Compile Include="Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal.Designer.cs">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\Bascula\DsBascula.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsBascula.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\DsProd.Designer.cs" />
+    <Compile Include="Reportes\Bascula\DsReportes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsReportes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\RptMovCrudaCamion.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\RptMovCrudaCamion.Designer.cs">
+      <DependentUpon>RptMovCrudaCamion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\RptProduccionTarimaUnidad.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\RptProduccionTarimaUnidad.Designer.cs">
+      <DependentUpon>RptProduccionTarimaUnidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_MovimientosBascula.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_MovimientosBascula.Designer.cs">
+      <DependentUpon>Rpt_MovimientosBascula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_PesosBruto.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_PesosBruto.Designer.cs">
+      <DependentUpon>Rpt_PesosBruto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_PesosProdCruda.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_PesosProdCruda.Designer.cs">
+      <DependentUpon>Rpt_PesosProdCruda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_PesosTara.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_PesosTara.Designer.cs">
+      <DependentUpon>Rpt_PesosTara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_Pesos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_Pesos.Designer.cs">
+      <DependentUpon>Rpt_Pesos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_ProducBlancaJumbo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_ProducBlancaJumbo.designer.cs">
+      <DependentUpon>Rpt_ProducBlancaJumbo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_ProducBlancaTarima.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_ProducBlancaTarima.designer.cs">
+      <DependentUpon>Rpt_ProducBlancaTarima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_TrasladoInternoCE5.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_TrasladoInternoCE5.Designer.cs">
+      <DependentUpon>Rpt_TrasladoInternoCE5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_TrasladoInterno.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\Rpt_TrasladoInterno.Designer.cs">
+      <DependentUpon>Rpt_TrasladoInterno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Bascula\TARIMA_BARRA.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Bascula\TARIMA_BARRA.Designer.cs">
+      <DependentUpon>TARIMA_BARRA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Visor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\Visor.Designer.cs">
+      <DependentUpon>Visor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrasladoExpress\ReportesProduccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrasladoExpress\ReportesProduccion.Designer.cs">
+      <DependentUpon>ReportesProduccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrasladoExpress\AsignacionDocumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrasladoExpress\AsignacionDocumento.Designer.cs">
+      <DependentUpon>AsignacionDocumento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrasladoExpress\ProduccionTarimas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrasladoExpress\ProduccionTarimas.Designer.cs">
+      <DependentUpon>ProduccionTarimas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrasladoExpress\ProduccionJumbos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrasladoExpress\ProduccionJumbos.Designer.cs">
+      <DependentUpon>ProduccionJumbos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrasladoExpress\TrasladoCE5Dizucar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrasladoExpress\TrasladoCE5Dizucar.Designer.cs">
+      <DependentUpon>TrasladoCE5Dizucar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrasladoExpress\TrasladoInterno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrasladoExpress\TrasladoInterno.Designer.cs">
+      <DependentUpon>TrasladoInterno.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Bascula\BasculaProduccion.resx">
+      <DependentUpon>BasculaProduccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bascula\CorrecionBascula.resx">
+      <DependentUpon>CorrecionBascula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bascula\Bascula.resx">
+      <DependentUpon>Bascula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bascula\Movientos_Bascula.resx">
+      <DependentUpon>Movientos_Bascula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principal.resx">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Reportes\Bascula\RptMovCrudaCamion.resx">
+      <DependentUpon>RptMovCrudaCamion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\RptProduccionTarimaUnidad.resx">
+      <DependentUpon>RptProduccionTarimaUnidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\Rpt_MovimientosBascula.resx">
+      <DependentUpon>Rpt_MovimientosBascula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\Rpt_PesosBruto.resx">
+      <DependentUpon>Rpt_PesosBruto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\Rpt_PesosProdCruda.resx">
+      <DependentUpon>Rpt_PesosProdCruda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\Rpt_PesosTara.resx">
+      <DependentUpon>Rpt_PesosTara.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\Rpt_Pesos.resx">
+      <DependentUpon>Rpt_Pesos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\Rpt_ProducBlancaJumbo.resx">
+      <DependentUpon>Rpt_ProducBlancaJumbo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\Rpt_ProducBlancaTarima.resx">
+      <DependentUpon>Rpt_ProducBlancaTarima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\Rpt_TrasladoInternoCE5.resx">
+      <DependentUpon>Rpt_TrasladoInternoCE5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\Rpt_TrasladoInterno.resx">
+      <DependentUpon>Rpt_TrasladoInterno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Bascula\TARIMA_BARRA.resx">
+      <DependentUpon>TARIMA_BARRA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Visor.resx">
+      <DependentUpon>Visor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrasladoExpress\ReportesProduccion.resx">
+      <DependentUpon>ReportesProduccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrasladoExpress\AsignacionDocumento.resx">
+      <DependentUpon>AsignacionDocumento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrasladoExpress\ProduccionTarimas.resx">
+      <DependentUpon>ProduccionTarimas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrasladoExpress\ProduccionJumbos.resx">
+      <DependentUpon>ProduccionJumbos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrasladoExpress\TrasladoCE5Dizucar.resx">
+      <DependentUpon>TrasladoCE5Dizucar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrasladoExpress\TrasladoInterno.resx">
+      <DependentUpon>TrasladoInterno.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ADMINPTWIN_TemporaryKey.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Reportes\Bascula\DsBascula.xsc">
+      <DependentUpon>DsBascula.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Bascula\DsBascula.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsBascula.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reportes\Bascula\DsBascula.xss">
+      <DependentUpon>DsBascula.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Bascula\DsProd.xsc">
+      <DependentUpon>DsProd.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Bascula\DsProd.xsd" />
+    <None Include="Reportes\Bascula\DsProd.xss">
+      <DependentUpon>DsProd.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Bascula\DsReportes.xsc">
+      <DependentUpon>DsReportes.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\Bascula\DsReportes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsReportes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reportes\Bascula\DsReportes.xss">
+      <DependentUpon>DsReportes.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="logo2.ico" />
+    <Content Include="logo4.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
