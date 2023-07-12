@@ -1,0 +1,31 @@
+BROKER SCHEMA gen
+
+
+CREATE COMPUTE MODULE realizar_transferncia_Request_Response_deleteDataChar
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		--  CALL CopyEntireMessage();
+		 		  DECLARE NS3 NAMESPACE 'http://ws_ach_realiza_transferencia';
+		 DELETE FIELD OutputRoot.XMLNSC.realizar_transferncia.data;
+		 
+		 SET OutputRoot.XMLNSC.NS3:realizar_transfernciaResponse.resultado.codigo = InputRoot.XMLNSC.realizar_transferencia.resultado.codigo;
+		 SET OutputRoot.XMLNSC.NS3:realizar_transfernciaResponse.resultado.descripcion = InputRoot.XMLNSC.realizar_transferencia.resultado.descripcion; 
+		 
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

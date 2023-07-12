@@ -1,0 +1,44 @@
+
+
+CREATE COMPUTE MODULE postVerificarICG_Salida_error_true
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DELETE FIELD OutputRoot.HTTPRequestHeader;
+        DELETE FIELD OutputRoot.HTTPResponseHeader;
+        DELETE FIELD Environment.Variables;
+        
+		DELETE FIELD OutputRoot.JSON;
+        SET OutputRoot.JSON.Data.status  = 401;
+        SET OutputRoot.JSON.Data.message  = 'Intente mas tarde';
+        SET OutputRoot.JSON.Data.name  = '';
+		
+		DELETE FIELD Environment.Variables.JSON;
+        SET Environment.Variables.JSON.Data = OutputRoot.JSON.Data;
+        
+        SET OutputRoot.XMLNSC.Datos = OutputRoot.JSON.Data;   
+		DECLARE xmlAsBlob BLOB ASBITSTREAM(OutputRoot.XMLNSC CCSID 1208);   
+        DECLARE xmlAsChar CHARACTER CAST(xmlAsBlob AS CHARACTER CCSID 1208);  
+        SET Environment.Variables.ESBLogging.reintento = 0;
+		SET Environment.Variables.ESBLogging.trn_cobis = 18696; --codigo de transaccion
+		SET Environment.Variables.ESBLogging.TramaResp  = xmlAsChar;  
+		DELETE FIELD OutputRoot.XMLNSC;
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

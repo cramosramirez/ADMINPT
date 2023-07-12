@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ws_ach_realiza_transferencia" targetNamespace="http://ws_ach_realiza_transferencia" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://ws_ach_realiza_transferencia" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="ws_ach_realiza_transferenciaHttpBinding" originalBindingStyle="document"/>
+        <generatedXSD location="ws_ach_realiza_transferencia_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    
+        <xsd:schema targetNamespace="http://ws_ach_realiza_transferencia" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+      <xsd:include schemaLocation="ws_ach_realiza_transferencia_InlineSchema1.xsd"/>
+    </xsd:schema>
+    </wsdl:types>
+  <wsdl:message name="realizar_transfernciaRequestMsg">
+    <wsdl:part element="tns:realizar_transferncia" name="realizar_transfernciaParameters"/>
+  </wsdl:message>
+  <wsdl:message name="realizar_transfernciaResponseMsg">
+    <wsdl:part element="tns:realizar_transfernciaResponse" name="realizar_transfernciaResult"/>
+  </wsdl:message>
+  <wsdl:portType name="ws_ach_realiza_transferencia">
+    <wsdl:operation name="realizar_transferncia">
+      <wsdl:input message="tns:realizar_transfernciaRequestMsg" name="realizar_transfernciaRequest"/>
+      <wsdl:output message="tns:realizar_transfernciaResponseMsg" name="realizar_transfernciaResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ws_ach_realiza_transferenciaHttpBinding" type="tns:ws_ach_realiza_transferencia">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="realizar_transferncia">
+      <soap:operation soapAction="http://ws_ach_realiza_transferencia/realizar_transferncia"/>
+      <wsdl:input name="realizar_transfernciaRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="realizar_transfernciaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    </wsdl:binding>
+  <wsdl:service name="ws_ach_realiza_transferenciaHttpService">
+    <wsdl:port binding="tns:ws_ach_realiza_transferenciaHttpBinding" name="ws_ach_realiza_transferenciaHttpPort">
+      <soap:address location="http://localhost:7800/ws_ach_realiza_transferencia"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

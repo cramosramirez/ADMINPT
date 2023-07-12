@@ -1,0 +1,51 @@
+BROKER SCHEMA gen
+
+
+CREATE COMPUTE MODULE realizar_transferncia_Request_Response_obtenerRespEmp
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DECLARE ns4 NAMESPACE 'http://ws_ach_valida_parametros_emp'; 
+		
+		Declare codigo character;
+		declare descrip character; 
+		declare token character; 
+		
+		SET codigo = InputRoot.XMLNSC.ns4:valida_maximo_montos_empResponse.resultado.codigo;
+		SET descrip = InputRoot.XMLNSC.ns4:valida_maximo_montos_empResponse.resultado.descripcion;
+		SET token = InputRoot.XMLNSC.ns4:valida_maximo_montos_empResponse.datos.token; 
+		
+		if  codigo = '1' then -- monto mensual no se sobrepasa 
+			if token = 'S' then --se sobrepasa monto individual (pedir token)
+				propagate to terminal 2;
+				return false; 
+			else -- no se sobrepasa individual
+				propagate to terminal 0;
+				return false; 
+			end if;	
+			
+		else	--se sobrepasa el monto mensual
+			SET Environment.Variables.DescError =  descrip;
+			propagate to terminal -1;
+			return false;
+		
+		end if;
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

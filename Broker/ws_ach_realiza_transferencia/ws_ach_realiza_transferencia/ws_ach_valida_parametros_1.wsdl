@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!--File ws_ach_valida_parametros.wsdl, application ws_ach_valida_parametros--><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ws_ach_valida_parametros" targetNamespace="http://ws_ach_valida_parametros" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://ws_ach_valida_parametros" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="ws_ach_valida_parametrosHttpBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ws_ach_valida_parametros" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+<xsd:include schemaLocation="ws_ach_valida_parametros.xsd"/>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="validar_maximo_cuentasRequestMsg">
+    <wsdl:part element="tns:validar_maximo_cuentas" name="validar_maximo_cuentas_parameters"/>
+  </wsdl:message>
+  <wsdl:message name="validar_maximo_cuentasResponseMsg">
+    <wsdl:part element="tns:validar_maximo_cuentas_response" name="validar_maximo_cuentas_result"/>
+  </wsdl:message>
+  <wsdl:message name="validar_maximo_montosRequestMsg">
+    <wsdl:part element="tns:validar_maximo_montos" name="validar_maximo_montos_parameters"/>
+  </wsdl:message>
+  <wsdl:message name="validar_maximo_montosResponseMsg">
+    <wsdl:part element="tns:validar_maximo_montos_response" name="validar_maximo_montos_result"/>
+  </wsdl:message>
+  <wsdl:portType name="ws_ach_valida_parametros">
+    <wsdl:operation name="validar_maximo_cuentas">
+      <wsdl:input message="tns:validar_maximo_cuentasRequestMsg" name="validar_maximo_cuentasRequest"/>
+      <wsdl:output message="tns:validar_maximo_cuentasResponseMsg" name="validar_maximo_cuentasResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="validar_maximo_montos">
+      <wsdl:input message="tns:validar_maximo_montosRequestMsg" name="validar_maximo_montosRequest"/>
+      <wsdl:output message="tns:validar_maximo_montosResponseMsg" name="validar_maximo_montosResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ws_ach_valida_parametrosHttpBinding" type="tns:ws_ach_valida_parametros">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="validar_maximo_cuentas">
+      <soap:operation soapAction="http://ws_ach_valida_parametros/validar_maximo_cuentas"/>
+      <wsdl:input name="validar_maximo_cuentasRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validar_maximo_cuentasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validar_maximo_montos">
+      <soap:operation soapAction="http://ws_ach_valida_parametros/validar_maximo_montos"/>
+      <wsdl:input name="validar_maximo_montosRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validar_maximo_montosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ws_ach_valida_parametrosHttpService">
+    <wsdl:port binding="tns:ws_ach_valida_parametrosHttpBinding" name="ws_ach_valida_parametrosHttpPort">
+      <soap:address location="http://10.160.209.27:7812/ws_ach_valida_parametros"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

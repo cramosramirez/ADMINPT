@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Service1" targetNamespace="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="BasicHttpBinding_icg_token" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+<xsd:import namespace="http://tempuri.org/" schemaLocation="Service1.xsd"/>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="icg_token_obtenerToken_InputMessage">
+    <wsdl:part element="tns:obtenerToken" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="icg_token_obtenerToken_OutputMessage">
+    <wsdl:part element="tns:obtenerTokenResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="icg_token_consultarCuentaTercero_InputMessage">
+    <wsdl:part element="tns:consultarCuentaTercero" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="icg_token_consultarCuentaTercero_OutputMessage">
+    <wsdl:part element="tns:consultarCuentaTerceroResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="icg_token">
+    <wsdl:operation name="obtenerToken">
+      <wsdl:input message="tns:icg_token_obtenerToken_InputMessage" wsaw:Action="http://tempuri.org/icg_token/obtenerToken"/>
+      <wsdl:output message="tns:icg_token_obtenerToken_OutputMessage" wsaw:Action="http://tempuri.org/icg_token/obtenerTokenResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="consultarCuentaTercero">
+      <wsdl:input message="tns:icg_token_consultarCuentaTercero_InputMessage" wsaw:Action="http://tempuri.org/icg_token/consultarCuentaTercero"/>
+      <wsdl:output message="tns:icg_token_consultarCuentaTercero_OutputMessage" wsaw:Action="http://tempuri.org/icg_token/consultarCuentaTerceroResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_icg_token" type="tns:icg_token">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="obtenerToken">
+      <soap:operation soapAction="http://tempuri.org/icg_token/obtenerToken" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarCuentaTercero">
+      <soap:operation soapAction="http://tempuri.org/icg_token/consultarCuentaTercero" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port binding="tns:BasicHttpBinding_icg_token" name="BasicHttpBinding_icg_token">
+      <soap:address location="http://140.254.1.16/ADAP/WebServices/token_icg/Service1.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!--File ws_ach_valida_parametros_emp.wsdl, application ws_ach_valida_parametros_emp--><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ws_ach_valida_parametros_emp" targetNamespace="http://ws_ach_valida_parametros_emp" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://ws_ach_valida_parametros_emp" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="ws_ach_valida_parametros_empHttpBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ws_ach_valida_parametros_emp" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+<xsd:include schemaLocation="ws_ach_valida_parametros_emp.xsd"/>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="valida_maximo_montos_empRequestMsg">
+    <wsdl:part element="tns:valida_maximo_montos_emp" name="valida_maximo_montos_empParameters"/>
+  </wsdl:message>
+  <wsdl:message name="valida_maximo_montos_empResponseMsg">
+    <wsdl:part element="tns:valida_maximo_montos_empResponse" name="valida_maximo_montos_empResult"/>
+  </wsdl:message>
+  <wsdl:portType name="ws_ach_valida_parametros_emp">
+    <wsdl:operation name="valida_maximo_montos_emp">
+      <wsdl:input message="tns:valida_maximo_montos_empRequestMsg" name="valida_maximo_montos_empRequest"/>
+      <wsdl:output message="tns:valida_maximo_montos_empResponseMsg" name="valida_maximo_montos_empResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ws_ach_valida_parametros_empHttpBinding" type="tns:ws_ach_valida_parametros_emp">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="valida_maximo_montos_emp">
+      <soap:operation soapAction="http://ws_ach_valida_parametros_emp/valida_maximo_montos_emp"/>
+      <wsdl:input name="valida_maximo_montos_empRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="valida_maximo_montos_empResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ws_ach_valida_parametros_empHttpService">
+    <wsdl:port binding="tns:ws_ach_valida_parametros_empHttpBinding" name="ws_ach_valida_parametros_empHttpPort">
+      <soap:address location="http://10.160.209.27:7895/ws_ach_valida_parametros_emp"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

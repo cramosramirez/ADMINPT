@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">  
+        <xsd:element name="mensaje" type="xsd:string"/> 
+    <xsd:element name="celular" type="xsd:string"/>  
+</xsd:schema>]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var"/>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/SOAPDomainMsg.xsd" var="var1"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var4"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var5"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var2"/>
+    <output path="/EnvioNotificacion.xsd" var="var3"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="out" uri="http://tempuri.org/"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="CA_ACH_RealizarTransferencia001_REQ_Mapping">
+        <input path="$var/mb:env(Environment)" var="Environment">
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="celular" ref="var4" var="any"/>
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="mensaje" ref="var4" var="any2"/>
+        </input>
+        <input path="$var1/mb:msg(SOAP_Domain_Msg,assembly,SOAP,Properties)" var="ComIbmMessageAssembly_SOAP_Domain_Msg"/>
+        <output path="$var2/mb:env(Environment)" var="Environment1">
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="celular" ref="var4" var="any1"/>
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="mensaje" ref="var4" var="any3"/>
+        </output>
+        <output namespace="http://tempuri.org/" path="$var3/mb:msg(EnvioSMS,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_EnvioSMS"/>
+        <passthrough>
+            <input path="$Environment/."/>
+            <output path="$Environment1/."/>
+            <updates/>
+        </passthrough>
+        <move>
+            <input path="$ComIbmMessageAssembly_SOAP_Domain_Msg/Properties"/>
+            <output path="$ComIbmMessageAssembly_EnvioSMS/Properties"/>
+        </move>
+        <assign value="1">
+            <output path="$ComIbmMessageAssembly_EnvioSMS/EnvioSMS/idServicio"/>
+        </assign>
+        <assign value="12">
+            <output path="$ComIbmMessageAssembly_EnvioSMS/EnvioSMS/canal"/>
+        </assign>
+        <move>
+            <input path="$Environment/Variables/celular[1]"/>
+            <output path="$ComIbmMessageAssembly_EnvioSMS/EnvioSMS/telefono"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/mensaje[1]"/>
+            <output path="$ComIbmMessageAssembly_EnvioSMS/EnvioSMS/contenido"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

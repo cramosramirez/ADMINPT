@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="gen" version="8.0.5.0" xmlns:map="gen">
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">       
+        <xsd:element name="datos">   
+    <xsd:complexType>   
+      <xsd:sequence>   
+        <xsd:element name="mis" type="xsd:string"/>   
+                      <xsd:element name="Amount" type="xsd:decimal"/>  
+            </xsd:sequence>   
+    </xsd:complexType>   
+  </xsd:element>   
+    <xsd:element name="monedaTemp" type="xsd:string"/>       
+</xsd:schema>]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var"/>
+    <input path="/ws_ach_realiza_transferencia_InlineSchema1.xsd" var="var1"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var4"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var5"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var2"/>
+    <output path="/ws_ach_valida_parametros.xsd" var="var3"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="in" uri="http://ws_ach_realiza_transferencia"/>
+        <namespace kind="supplement" prefix="out" uri="http://ws_ach_valida_parametros"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="realizar_transferncia_Request_Response_mapToValidaLim">
+        <input path="$var/mb:env(Environment)" var="Environment">
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="monedaTemp" ref="var4" var="any"/>
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="datos" ref="var4" var="any2"/>
+        </input>
+        <input namespace="http://ws_ach_realiza_transferencia" path="$var1/mb:msg(realizar_transferncia,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_realizar_transferncia"/>
+        <output path="$var2/mb:env(Environment)" var="Environment1">
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="monedaTemp" ref="var4" var="any1"/>
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="datos" ref="var4" var="any3"/>
+        </output>
+        <output namespace="http://ws_ach_valida_parametros" path="$var3/mb:msg(validar_maximo_montos,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_validar_maximo_montos"/>
+        <passthrough>
+            <input path="$Environment/."/>
+            <output path="$Environment1/."/>
+            <updates/>
+        </passthrough>
+        <move>
+            <input path="$ComIbmMessageAssembly_realizar_transferncia/Properties" var="Properties"/>
+            <output path="$ComIbmMessageAssembly_validar_maximo_montos/Properties"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/monedaTemp"/>
+            <output path="$ComIbmMessageAssembly_validar_maximo_montos/validar_maximo_montos/moneda"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/datos/Amount"/>
+            <output path="$ComIbmMessageAssembly_validar_maximo_montos/validar_maximo_montos/monto"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/datos/mis"/>
+            <output path="$ComIbmMessageAssembly_validar_maximo_montos/validar_maximo_montos/login"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

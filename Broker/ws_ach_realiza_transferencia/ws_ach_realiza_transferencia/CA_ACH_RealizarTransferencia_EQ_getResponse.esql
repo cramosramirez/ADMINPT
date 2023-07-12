@@ -1,0 +1,99 @@
+
+
+CREATE COMPUTE MODULE CA_ACH_RealizarTransferencia_EQ_getResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		  CALL CopyEntireMessage();
+		
+					 	-- SET  OutputRoot.MQMD = Environment.MQMD;					
+		DECLARE resultado CHARACTER ;
+		DECLARE descripcion CHARACTER ; 
+		DECLARE moneda_ins integer;
+		DECLARE secuencial integer;
+		-- DECLARE resultado_desc CHARACTER;
+		
+		 
+		set resultado = InputRoot.XMLNSC.realizar_transferenciaResponse.resultado.Codigo;
+		set descripcion = InputRoot.XMLNSC.realizar_transferenciaResponse.resultado.Descripcion;   
+		
+		 
+			if resultado = 1 then 
+				--guardar en bitacora 
+				DECLARE login  CHARACTER Environment.DatosBitacora.OriginatorIdentification;							
+				DECLARE cuenta_destino  CHARACTER Environment.DatosBitacora.AccountNumber;	
+				DECLARE tipo_cuenta_destino  CHARACTER Environment.DatosBitacora.AccountType;	
+				DECLARE monto  DECIMAL Environment.DatosBitacora.Amount;	
+				DECLARE tipo_transaccion  CHARACTER Environment.DatosBitacora.TransactionType;	
+				DECLARE cuenta_origen  CHARACTER Environment.DatosBitacora.OriginAccountNumber;	
+				DECLARE TransactionProcessing  CHARACTER Environment.DatosBitacora.TransactionProcessing;
+				DECLARE tipo_cuenta_origen  CHARACTER Environment.DatosBitacora.OriginAccountType;							
+				DECLARE desc  CHARACTER Environment.DatosBitacora.Description;			
+		        DECLARE moneda CHARACTER Environment.DatosBitacora.moneda; 
+		        DECLARE canal   INTEGER Environment.DatosBitacora.canal;
+		        DECLARE ip CHARACTER Environment.DatosBitacora.ip;
+		        DECLARE mis INTEGER CAST(Environment.DatosBitacora.mis AS INTEGER);  
+				DECLARE tipo_usuario CHARACTER Environment.DatosBitacora.tipo_usuario;
+				DECLARE inst_financiera CHARACTER Environment.DatosBitacora.inst_financiera;
+				DECLARE nom_cta_dest CHARACTER Environment.DatosBitacora.nom_cta_dest; 
+		   	
+		   	if moneda = 'USD' then
+		   		set moneda_ins = 1;	
+		   	else 
+		   		set moneda_ins = 0; 
+		   	end if;		   	
+		    
+		   		CALL sp_genera_sec_timestamp (secuencial);
+		   		  
+				 CALL sp_ach_bitacora_transferencia(secuencial, cuenta_origen, moneda_ins, monto, inst_financiera,cuenta_destino, nom_cta_dest, moneda_ins, monto, login,  tipo_transaccion, tipo_usuario, desc,ip,canal, mis, TransactionProcessing);
+			end if;
+				 	
+			--SET OutputRoot.XMLNSC.realizar_transferencia.resultado.codigo = resultado;  
+			--SET OutputRoot.XMLNSC.realizar_transferencia.resultado.descripcion = resultado_desc;	
+			
+		RETURN TRUE;
+	END;
+
+ 
+	CREATE PROCEDURE sp_genera_sec_timestamp(
+	     	INOUT o_secuencial			INTEGER		
+	    )
+	    LANGUAGE DATABASE       	    
+	    EXTERNAL NAME "dbo.sp_genera_sec_timestamp";
+
+	CREATE PROCEDURE sp_ach_bitacora_transferencia(
+	     	IN i_secuencial				INTEGER,
+			IN i_cuenta_origen			CHARACTER,
+			IN i_moneda_origen			INTEGER,
+			IN i_monto_origen			DECIMAL,
+			IN i_inst_financiera     	CHARACTER, 
+			IN i_cuenta_destino			CHARACTER,
+			IN i_nom_cta_destino    	CHARACTER, 
+			IN i_moneda_destino			INTEGER,
+			IN i_monto_destino			DECIMAL,
+			IN i_login					CHARACTER,			
+			IN i_tipo_transf			CHARACTER,
+			IN i_tipo_usuario			CHARACTER,
+			IN i_descripcion			CHARACTER,
+			IN i_ip						CHARACTER,
+		    IN i_canal                	INTEGER,
+		    IN i_ente					INTEGER,
+		    IN i_transaction_proc 		CHARACTER
+	    )
+	    LANGUAGE DATABASE       	    
+	    EXTERNAL NAME "dbo.sp_ach_bitacora_transferencia";
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

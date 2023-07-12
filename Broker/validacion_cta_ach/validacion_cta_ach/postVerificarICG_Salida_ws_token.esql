@@ -1,0 +1,44 @@
+DECLARE ns NAMESPACE 'http://tempuri.org/';
+
+
+CREATE COMPUTE MODULE postVerificarICG_Salida_ws_token
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		  
+		DECLARE tramaResp CHAR InputRoot.XMLNSC.ns:obtenerTokenResponse.ns:obtenerTokenResult;
+		
+		--CREATE LASTCHILD OF Environment.Variables.Respuesta DOMAIN ('JSON') PARSE ('{"token_type":"0","access_token":"00"}' CCSID 1208);
+		CREATE LASTCHILD OF Environment.Variables.Respuesta DOMAIN ('JSON') PARSE (tramaResp CCSID 1208);
+		
+		           
+		IF Environment.Variables.Respuesta.JSON.Data.error IS NOT NULL THEN
+			 DELETE FIELD OutputRoot.JSON.Data;
+			 SET Environment.Variables.DescError = Environment.Variables.Respuesta.JSON.Data.error_description;
+			 SET Environment.Variables.StatusError = Environment.Variables.Respuesta.JSON.Data.status;
+				
+			 PROPAGATE TO TERMINAL -1;
+			 RETURN FALSE;
+			    
+		END IF;	 	
+--		SET Environment.Variables.Respuesta.JSON.Data.token_type = '0'; 
+--		SET Environment.Variables.Respuesta.JSON.Data.access_token = '00'; 
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

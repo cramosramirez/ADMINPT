@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.cysce.com/esb/esbcore/v2/header" xmlns:esb="http://www.cysce.com/esb/esbcore/v2/header">
+  <xsd:complexType name="esbHdr">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Service" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="Operation" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="Version" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="User" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="Passwd" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="Mod_invoque" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Service_Id" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Transaction_Id" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Consumer" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="Consumer_Id" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Consumer_ReplyToQ" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Consumer_ReplyToQMgr" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MsgId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CorrelId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Estado" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Auditoria" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Retry" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Code" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Reason" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DetailRetCode">
+        <xsd:complexType>
+          <xsd:sequence maxOccurs="1" minOccurs="1">
+            <xsd:element maxOccurs="unbounded" name="Detail" type="esb:Detail"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="Detail">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="Code" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="Reason" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="Detail" type="esb:Detail"/>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:element name="esbHdr" type="esb:esbHdr">
+    <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/esbHdr;XSDElementDeclaration$MRObject"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+    <xsd:element name="esbHdr_Resp" type="esb:esbHdr"/>
+</xsd:schema>

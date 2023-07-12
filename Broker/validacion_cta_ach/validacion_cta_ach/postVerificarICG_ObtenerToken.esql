@@ -1,0 +1,50 @@
+
+
+CREATE COMPUTE MODULE postVerificarICG_ObtenerToken
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DECLARE token_type    CHARACTER;
+		DECLARE access_token  CHARACTER;
+		DECLARE refresh_token  CHARACTER;	
+		DECLARE status 	INTEGER;
+		
+		 SET token_type   = Environment.Variables.Respuesta.JSON.Data.token_type;--  InputRoot.JSON.Data.token_type;
+          SET access_token = Environment.Variables.Respuesta.JSON.Data.access_token;-- InputRoot.JSON.Data.access_token;
+          SET refresh_token =  Environment.Variables.Respuesta.JSON.Data.refresh_token;--InputRoot.JSON.Data.refresh_token;
+          
+          DELETE FIELD OutputRoot.JSON;
+           DELETE FIELD OutputRoot.HTTPRequestHeader;
+           DELETE FIELD OutputRoot.HTTPResponseHeader;
+            
+          --SE PARAMETRIZA LA CABECERA
+          SET OutputRoot.HTTPRequestHeader."Authorization" = token_type || ' ' || access_token;
+		  SET OutputRoot.HTTPRequestHeader."Content-Type" = 'application/json';
+		  
+		  --SE GENERA EL MENSAJE REQUEST DE ACTUALIZACION
+          SET OutputRoot.JSON.Data.Destination = Environment.Variables.JSON.Data.banco;
+          SET OutputRoot.JSON.Data.type   ='001';
+          SET OutputRoot.JSON.Data.payload.account  = Environment.Variables.JSON.Data.cuenta;
+          SET OutputRoot.JSON.Data.payload.currency = Environment.Variables.JSON.Data.moneda;
+          SET OutputRoot.JSON.Data.payload.product = Environment.Variables.JSON.Data.tipo; 
+          SET OutputRoot.JSON.Data.Source = 'BANRURAL'; --valor quemado ya que siempre realizara la peticion BANRURAL
+          SET OutputRoot.JSON.Data.UUID = Environment.Variables.UUID;
+          
+          RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://tempuri.org/">
+  <xsd:element ibmSchExtn:docRoot="true" name="obtenerToken">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="cuenta" nillable="true" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="obtenerTokenResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="obtenerTokenResult" nillable="true" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarCuentaTercero">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="cuenta" nillable="true" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="moneda" nillable="true" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="tipo" nillable="true" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="bancoDestino" nillable="true" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="uuid" nillable="true" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="token" nillable="true" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="tipoToken" nillable="true" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarCuentaTerceroResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="consultarCuentaTerceroResult" nillable="true" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

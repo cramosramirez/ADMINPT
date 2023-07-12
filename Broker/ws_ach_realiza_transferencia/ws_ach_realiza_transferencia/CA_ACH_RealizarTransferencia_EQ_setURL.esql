@@ -1,0 +1,174 @@
+
+
+CREATE COMPUTE MODULE CA_ACH_RealizarTransferencia_EQ_setURL
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 	CALL CopyMessageHeaders();
+		--CALL CopyEntireMessage();		
+		
+		DECLARE ns211 NAMESPACE 'http://www.w3.org/2003/05/soap-envelope';
+		DECLARE url CHARACTER;
+		DECLARE operacion CHARACTER 'URL';
+		DECLARE nemonico CHARACTER;
+		DECLARE ip_rest CHARACTER;  
+		DECLARE api_key CHARACTER; 
+		DECLARE indice INTEGER;
+		DECLARE transaction_code INTEGER; 
+		DECLARE DestAcountStandar INTEGER;
+		DECLARE nueva_adenda CHARACTER;  
+		DECLARE nom_prod CHARACTER Environment.Variables.nombre_producto;   		 
+		DECLARE metodo name  Environment.Service.Operation.Name; -- nombre del método invocado	
+			   	
+		set indice = 1; 
+		/*	   	
+		DECLARE OriginatorIdentification  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.OriginatorIdentification;	
+		DECLARE ParticipantName  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.ParticipantName;	
+		DECLARE ParticipantIdentification  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.ParticipantIdentification;	
+		DECLARE FinancialInstitutionIdentification  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.FinancialInstitutionIdentification;	
+		DECLARE AccountNumber  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.AccountNumber;	
+		DECLARE AccountType  INTEGER CAST(InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.AccountType AS INTEGER);	
+		DECLARE Amount  DECIMAL CAST(InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.Amount AS DECIMAL);	
+		DECLARE TransactionType  INTEGER CAST(InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.TransactionType AS INTEGER);	
+		DECLARE OriginAccountNumber  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.OriginAccountNumber;	
+		DECLARE OriginAccountType  INTEGER CAST( InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.OriginAccountType AS INTEGER);	
+		DECLARE TransactionType2  INTEGER CAST(InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.TransactionType AS INTEGER);	
+		DECLARE TransactionProcessing  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.TransactionProcessing;	
+		DECLARE AccountStandard  INTEGER CAST(InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.AccountStandard AS INTEGER);
+		DECLARE Description  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.Description;			
+        DECLARE moneda  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.moneda;
+		*/	
+		DECLARE OriginatorIdentification  CHARACTER Environment.DatosBitacora.mis;  --OriginatorIdentification;	
+		DECLARE ParticipantName  CHARACTER Environment.DatosBitacora.ParticipantName;	
+		DECLARE ParticipantIdentification  CHARACTER Environment.DatosBitacora.ParticipantIdentification;	
+		DECLARE FinancialInstitutionIdentification  CHARACTER Environment.DatosBitacora.FinancialInstitutionIdentification;	
+		DECLARE AccountNumber  CHARACTER Environment.DatosBitacora.AccountNumber;	
+		DECLARE AccountType  INTEGER CAST(Environment.DatosBitacora.AccountType AS INTEGER);	
+		DECLARE Amount  DECIMAL CAST(Environment.DatosBitacora.Amount AS DECIMAL);	
+		DECLARE TransactionType  INTEGER CAST(Environment.DatosBitacora.TransactionType AS INTEGER);	
+		--DECLARE OriginAccountNumber  CHARACTER Environment.DatosBitacora.OriginAccountNumber;
+		DECLARE OriginAccountNumber CHARACTER  Environment.DatosCuentaOrigen.cuenta; 	
+		DECLARE OriginAccountType  INTEGER CAST( Environment.DatosBitacora.OriginAccountType AS INTEGER);	
+		DECLARE TransactionType2  INTEGER CAST(Environment.DatosBitacora.TransactionType AS INTEGER);	
+		DECLARE TransactionProcessing  CHARACTER Environment.DatosBitacora.TransactionProcessing;	
+		--DECLARE AccountStandard  INTEGER CAST(Environment.DatosBitacora.AccountStandard AS INTEGER);
+		DECLARE AccountStandard  INTEGER CAST(Environment.DatosCuentaOrigen.estandar AS INTEGER);  
+		DECLARE Description  CHARACTER Environment.DatosBitacora.Description;			
+		DECLARE moneda  CHARACTER Environment.DatosBitacora.moneda; 
+		
+		/*incio Armado de nueva adenda  */
+		if LENGTH(Description)>32  then   
+			set Description = SUBSTRING(Description FROM 1 FOR 32 );
+		end if; 
+		 
+		if LENGTH(nom_prod)>16  then     
+			set nom_prod = SUBSTRING(nom_prod FROM 1 FOR 16 );
+		end if; 
+				   
+		set nueva_adenda = OriginAccountNumber || '*' ||  nom_prod || '*' || Description || '\'; 
+		/*fin armado de nueva adenda*/
+			 
+		SET Environment.DatosAdenda.adenda = nueva_adenda;
+		--determinar transaction code 
+		
+			if TransactionType = 1  then --creditos 
+				
+				if  AccountType = 1 then --cuenta monetario 
+					set transaction_code = 22; 
+				elseif AccountType = 2 then --ahorros   
+					set transaction_code = 32;  
+				else -- credito o tc  
+					set transaction_code = 52;
+				end if;
+				
+			else --debitos 
+				
+				if  AccountType = 1 then --cuenta monetario 
+					set transaction_code = 27; 
+				elseif AccountType = 2 then --ahorros   
+					set transaction_code = 37;  
+				else -- credito o tc  
+					set transaction_code = 55;
+				end if;
+				
+			end if;
+			
+		SET Environment.DatosTran.transaction_code = transaction_code; 
+
+		
+		--determinar a que instancia se va a consultar  	
+		/* if moneda = 'USD' then
+			SET nemonico = 'ACHTRANSD'; 			
+		else  
+			SET nemonico = 'ACHTRANSQ';   			
+		end if; 
+				   
+		CALL sp_aap_busca_ptos_servicio(operacion, 0, 0, 0, 0, 0.0, 0.0, 0.0, '', nemonico, ip_rest, Environment.ResultSet[]);
+				
+       
+        SET api_key = Environment.Variables.api_key ;        
+								
+		SET url = ip_rest;
+ 		SET OutputRoot.HTTPRequestHeader."API_KEY" = api_key;  
+        SET OutputRoot.HTTPRequestHeader."Content-Type" = 'application/json'; 
+        -- poner el json en el body     
+               --SE GENERA EL MENSAJE REQUEST (PARA METODO )      
+        SET OutputRoot.JSON.Data.OriginatorIdentification = OriginatorIdentification;
+        SET OutputRoot.JSON.Data.CreateParticipantIfNotExist = false;    
+        CREATE FIELD OutputRoot.JSON.Data.Transactions IDENTITY (JSON.Array)Transactions;
+        SET OutputRoot.JSON.Data.Transactions.Item[indice].Participant.ParticipantName = ParticipantName;    
+		SET OutputRoot.JSON.Data.Transactions.Item[indice].Participant.ParticipantIdentification = ParticipantIdentification;  
+		SET OutputRoot.JSON.Data.Transactions.Item[indice].Participant.Account.FinancialInstitutionIdentification = FinancialInstitutionIdentification;  
+        SET OutputRoot.JSON.Data.Transactions.Item[indice].Participant.Account.AccountNumber = AccountNumber;  
+   		SET OutputRoot.JSON.Data.Transactions.Item[indice].Participant.Account.AccountType = AccountType;
+   		SET OutputRoot.JSON.Data.Transactions.Item[indice].Participant.Account.AccountStandard = DestAcountStandar; 
+        SET OutputRoot.JSON.Data.Transactions.Item[indice].Amount = Amount;
+        -- SET OutputRoot.JSON.Data.Transactions.Item[indice].TransactionType = TransactionType;
+        SET OutputRoot.JSON.Data.Transactions.Item[indice].Description = nueva_adenda; 
+        SET OutputRoot.JSON.Data.OriginAccountNumber = OriginAccountNumber;
+        SET OutputRoot.JSON.Data.OriginAccountType = OriginAccountType;
+        SET OutputRoot.JSON.Data.TransactionType = TransactionType2;
+        SET OutputRoot.JSON.Data.TransactionProcessing = TransactionProcessing;
+        SET OutputRoot.JSON.Data.AccountStandard = AccountStandard;   
+        -------------------------------------------------  [indice] 
+        -- SET OutputRoot.JSON.Data = InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.datos_pc;
+        -------------------------------------------------- 
+        SET OutputRoot.Properties.CodedCharSetId = 1208; 
+		SET OutputRoot.HTTPRequestHeader."X-Original-HTTP-URL" = url;
+  		DELETE FIELD OutputRoot.HTTPInputHeader;*/   
+  		
+		RETURN TRUE;
+	END;
+
+
+CREATE PROCEDURE sp_aap_busca_ptos_servicio(
+    IN	i_operacion				CHARACTER,
+    IN  i_departamento          INTEGER,
+    IN  i_municipio             INTEGER,
+    IN  i_codigo                INTEGER,
+    IN  i_zona                  INTEGER,
+    IN 	i_latitud               DECIMAL,
+    IN 	i_longitud              DECIMAL,
+    IN 	i_radio                 DECIMAL,
+    IN 	i_tipo                  CHARACTER,
+    IN 	i_nemonico              CHARACTER,
+    INOUT o_url                 CHARACTER
+    )
+    LANGUAGE DATABASE       
+    DYNAMIC RESULT SETS 1
+    EXTERNAL NAME "dbo.sp_aap_busca_ptos_servicio";
+    
+    
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

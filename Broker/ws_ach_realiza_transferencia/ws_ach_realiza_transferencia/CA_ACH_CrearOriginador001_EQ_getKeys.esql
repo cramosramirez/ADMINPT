@@ -1,0 +1,96 @@
+
+
+CREATE COMPUTE MODULE CA_ACH_RealizarTransferencia001_EQ_getKeys
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		--CALL CopyMessageHeaders();
+		 CALL CopyEntireMessage();		
+		
+		DECLARE ns211 NAMESPACE 'http://www.w3.org/2003/05/soap-envelope';
+		DECLARE url CHARACTER;
+		DECLARE operacion CHARACTER 'URL';
+		DECLARE nemonico CHARACTER;
+		DECLARE ip_rest CHARACTER;  
+		DECLARE api_key CHARACTER;
+		DECLARE nemonico_key CHARACTER;
+		SET Environment.Service.Operation.Name = 'realizar_transferencia'; 
+		DECLARE metodo name  Environment.Service.Operation.Name; -- nombre del método invocado
+			 
+		/*mantener mqmd*/
+		 SET Environment.MQMD = InputRoot.MQMD; 
+		/*fin mantener mqmd*/
+			  	
+		-- DECLARE id_originador  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_AsociarOriginador.data.id_originador;	
+		DECLARE moneda  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.moneda;  
+			
+		DECLARE AccountNumber CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.AccountNumber;
+		DECLARE AccountType CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.AccountType;
+		DECLARE AccountFinInstId CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.FinancialInstitutionIdentification;
+		DECLARE tipoUsuario CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.tipo_usuario;
+		DECLARE mis CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.mis;
+		DECLARE originador CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.OriginatorIdentification;
+		DECLARE AccountMoneda CHARACTER;
+		
+		
+		
+		--determinar a que instancia se va a consultar  	
+		 if moneda = 'USD' then 			
+			 
+			SET AccountMoneda = '1';
+		else  			
+			
+			SET AccountMoneda = '0'; 
+		end if; 
+		
+		-- outcerr inicio 220623
+		-- asignar el equivalente de tipo de cuenta para el servicio de validacion_cta_ach		
+		DECLARE TipoCuentaValidacion CHARACTER;
+		CASE AccountType
+			WHEN '1' THEN
+			    SET TipoCuentaValidacion ='3';--monetaria
+			WHEN '2' THEN
+			    SET TipoCuentaValidacion ='4';--ahorro
+			WHEN '3' THEN
+			    SET TipoCuentaValidacion ='39'; --tarjeta de credito
+			WHEN '4' THEN
+			    SET TipoCuentaValidacion ='7'; -- prestamos			
+		END CASE; 
+		SET Environment.Variables.TipoCuentaValidacion = TipoCuentaValidacion;		
+		-- outcerr fin 220623
+		
+		 /*
+		CALL sp_cl_parametro('175', nemonico_key, Environment.ResultSetKey[]);
+       
+        SET api_key = Environment.ResultSetKey[1].pa_parametro;
+        
+		SET Environment.Variables.api_key = api_key;*/ 
+		 
+		SET Environment.Variables.AccountNumber = AccountNumber;
+		SET Environment.Variables.AccountType = AccountType;		
+		SET Environment.Variables.AccountFinInstId = AccountFinInstId;
+		SET Environment.Variables.AccountMoneda = AccountMoneda;
+		SET Environment.Variables.tipoUsuario = tipoUsuario;
+		SET Environment.Variables.mis = mis;
+		SET Environment.Variables.originador = originador;
+		
+		RETURN TRUE;
+		
+	END;
+	
+	
+	
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

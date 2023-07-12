@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">  
+    <xsd:element name="UUID" type="xsd:string"/>  
+    <xsd:element name="Respuesta">  
+    <xsd:complexType>  
+      <xsd:sequence>  
+        <xsd:element name="JSON">  
+          <xsd:complexType>  
+            <xsd:sequence>  
+              <xsd:element name="Data">  
+                <xsd:complexType>  
+                  <xsd:sequence>  
+                    <xsd:element name="token_type" type="xsd:string"/>  
+                    <xsd:element name="access_token" type="xsd:string"/>  
+                  </xsd:sequence>  
+                </xsd:complexType>  
+              </xsd:element>  
+            </xsd:sequence>  
+          </xsd:complexType>  
+        </xsd:element>  
+      </xsd:sequence>  
+    </xsd:complexType>  
+  </xsd:element>  
+    <xsd:element name="JSON">  
+    <xsd:complexType>  
+      <xsd:sequence>  
+        <xsd:element name="Data">  
+          <xsd:complexType>  
+            <xsd:sequence>  
+              <xsd:element name="banco" type="xsd:string"/>  
+              <xsd:element name="cuenta" type="xsd:string"/>  
+              <xsd:element name="moneda" type="xsd:string"/>  
+              <xsd:element name="tipo" type="xsd:string"/>  
+            </xsd:sequence>  
+          </xsd:complexType>  
+        </xsd:element>  
+      </xsd:sequence>  
+    </xsd:complexType>  
+  </xsd:element>  
+</xsd:schema>]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var1"/>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/SOAPDomainMsg.xsd" var="var2"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var3"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var4"/>
+    <output path="/Service1.xsd" var="var5"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="out" uri="http://tempuri.org/"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="postVerificarICG_Map2">
+        <input path="$var1/mb:env(Environment)" var="Environment">
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="JSON" ref="var" var="any"/>
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="Respuesta" ref="var" var="any1"/>
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="UUID" ref="var" var="any2"/>
+        </input>
+        <input path="$var2/mb:msg(SOAP_Domain_Msg,assembly,SOAP,Properties)" var="ComIbmMessageAssembly_SOAP_Domain_Msg"/>
+        <output path="$var4/mb:env(Environment)" var="Environment1">
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="JSON" ref="var" var="any3"/>
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="Respuesta" ref="var" var="any4"/>
+            <cast castType="userDefined" path="$Environment1/Variables/any" qualifier="UUID" ref="var" var="any5"/>
+        </output>
+        <output namespace="http://tempuri.org/" path="$var5/mb:msg(consultarCuentaTercero,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_consultarCuentaTercero"/>
+        <passthrough>
+            <input path="$Environment/."/>
+            <output path="$Environment1/."/>
+            <updates/>
+        </passthrough>
+        <move>
+            <input path="$ComIbmMessageAssembly_SOAP_Domain_Msg/Properties"/>
+            <output path="$ComIbmMessageAssembly_consultarCuentaTercero/Properties"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/UUID[1]"/>
+            <output path="$ComIbmMessageAssembly_consultarCuentaTercero/consultarCuentaTercero/uuid"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/Respuesta[1]/JSON/Data/token_type"/>
+            <output path="$ComIbmMessageAssembly_consultarCuentaTercero/consultarCuentaTercero/tipoToken"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/Respuesta[1]/JSON/Data/access_token"/>
+            <output path="$ComIbmMessageAssembly_consultarCuentaTercero/consultarCuentaTercero/token"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/JSON[1]/Data/banco"/>
+            <output path="$ComIbmMessageAssembly_consultarCuentaTercero/consultarCuentaTercero/bancoDestino"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/JSON[1]/Data/cuenta"/>
+            <output path="$ComIbmMessageAssembly_consultarCuentaTercero/consultarCuentaTercero/cuenta"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/JSON[1]/Data/moneda"/>
+            <output path="$ComIbmMessageAssembly_consultarCuentaTercero/consultarCuentaTercero/moneda"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/JSON[1]/Data/tipo"/>
+            <output path="$ComIbmMessageAssembly_consultarCuentaTercero/consultarCuentaTercero/tipo"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

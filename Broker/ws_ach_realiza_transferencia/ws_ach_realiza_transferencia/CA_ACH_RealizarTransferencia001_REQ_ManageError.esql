@@ -1,0 +1,122 @@
+
+
+CREATE COMPUTE MODULE CA_ACH_RealizarTransferencia001_REQ_ManageError
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DECLARE mNumber integer; -- numero de excepción
+		DECLARE mText char; -- descripcion de la excepción
+		DECLARE existException boolean; -- bandera de existencia de excepción
+		-- llamado a función para extraer excepcion
+		CALL getLastExceptionDetail(InputExceptionList, mNumber, mText,existException);
+
+		IF mNumber IS NULL THEN SET mNumber = 1;
+		END IF;
+		IF mText IS NULL THEN SET mText = 'ERROR EN EL MANEJO DE LA EXCEPCION, NO SE VALIDO LISTA NEGRA';
+		END IF;
+
+		SET Environment.Variables.EsbHeader.Code = 1;
+		SET Environment.Variables.EsbHeader.Reason = '[' || CAST(mNumber as CHARACTER) || '] ' || mText;
+
+		IF existException THEN
+			-- Create a folder "ExceptionList" in the LocalEnvironment tree. This Folder will hold the BLOB representation of the ExceptionList
+			SET OutputLocalEnvironment.Variables.BitStream.Info = 'exceptionList';
+			-- Define a XML parser element to be used to serialize the ExceptionList into bitstream
+			CREATE LASTCHILD OF OutputLocalEnvironment.Variables.BitStream DOMAIN('XMLNSC') NAME 'XMLNSC';
+			-- Attach or create the tree that has to be serialized under the XML parser element. here it is the ExceptionList
+			SET OutputLocalEnvironment.Variables.BitStream.XMLNSC.ExceptionList = InputExceptionList;
+			-- Create the BLOB representation of the ExceptinList using the function ASBITSTREAM
+			SET OutputLocalEnvironment.Variables.BitStream.BLOB = ASBITSTREAM(OutputLocalEnvironment.Variables.BitStream.XMLNSC.ExceptionList OPTIONS FolderBitStream);
+			DECLARE InputMsg CHARACTER CAST (OutputLocalEnvironment.Variables.BitStream.BLOB AS CHARACTER CCSID 819);
+
+			SET Environment.Variables.EsbHeader.DetailRetCode = InputMsg;
+
+		END IF;
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE getLastExceptionDetail(IN InputTree reference,
+	OUT messageNumber integer,
+	OUT messageText char,
+	OUT existException boolean)
+	BEGIN
+		SET existException = false;
+		-- Create a reference to the first child of the exception list
+		declare ptrException reference to InputTree.*[1];
+		DECLARE Insert1 CHARACTER;
+		DECLARE Insert2 CHARACTER;
+		DECLARE Insert3 CHARACTER;
+		DECLARE Insert4 CHARACTER;
+		DECLARE Insert5 CHARACTER;
+		DECLARE Insert6 CHARACTER;
+		DECLARE Insert7 CHARACTER;
+		-- keep looping while the moves to the child of exception list work
+		WHILE lastmove (ptrException) DO
+			-- store the current values for the error number and text
+			IF ptrException.Number is not null THEN
+				SET Insert1 = '';
+				SET Insert2 = '';
+				SET Insert3 = '';
+				SET Insert4 = '';
+				SET Insert5 = '';
+				SET Insert6 = '';
+				SET Insert7 = '';
+				SET existException = true;
+				SET messageNumber = ptrException.Number;
+				IF ptrException.Insert[1].Text IS NOT NULL THEN
+					SET Insert1 = ptrException.Insert[1].Text;
+				END IF;
+				IF ptrException.Insert[2].Text IS NOT NULL THEN
+					SET Insert2 = ptrException.Insert[2].Text;
+				END IF;
+				IF ptrException.Insert[3].Text IS NOT NULL THEN
+					SET Insert3 = ptrException.Insert[3].Text;
+				END IF;
+				IF ptrException.Insert[4].Text IS NOT NULL THEN
+					SET Insert4 = ptrException.Insert[4].Text;
+				END IF;
+				IF ptrException.Insert[5].Text IS NOT NULL THEN
+					SET Insert5 = ptrException.Insert[5].Text;
+				END IF;
+				IF ptrException.Insert[6].Text IS NOT NULL THEN
+					SET Insert6 = ptrException.Insert[6].Text;
+				END IF;
+				IF ptrException.Insert[7].Text IS NOT NULL THEN
+					SET Insert7 = ptrException.Insert[7].Text;
+				END IF;
+				SET messageText = ptrException.Text || '[' || Insert1 || ']' || '[' || Insert2 ||']'|| '[' || Insert3 || ']'|| '[' || Insert4 || ']'|| '[' || Insert5 || ']'|| '[' || Insert6 || ']'|| '[' || Insert7 || ']';
+			END IF;
+			-- now move to the last child which should be the next exception list
+			move ptrException lastchild;
+		END WHILE;
+
+		SET messageText = REPLACE(messageText,'[unixODBC]','');
+		SET messageText = REPLACE(messageText,'[Driver Manager]','');
+		SET messageText = REPLACE(messageText,'[IBM]','');
+		SET messageText = REPLACE(messageText,'[ODBC 20101 driver]','');
+		SET messageText = REPLACE(messageText,'ODBC','');
+		SET messageText = REPLACE(messageText,'driver','');
+		SET messageText = REPLACE(messageText,'[SQL Server]','');
+		SET messageText = REPLACE(messageText,'Child SQL exception','');
+		SET messageText = REPLACE(messageText,'[  ]','');
+		SET messageText = REPLACE(messageText,'[]','');
+		SET messageText = REPLACE(messageText,'[0]',''); --
+		SET messageText = REPLACE(messageText,'com.ibm.broker.plugin.MbUserException','');
+		SET messageText = REPLACE(messageText,'''',''); --
+		END; /* fin getLastExceptionDetail */
+
+		CREATE PROCEDURE CopyMessageHeaders() BEGIN
+			DECLARE I INTEGER 1;
+			DECLARE J INTEGER;
+			SET J = CARDINALITY(InputRoot.*[]);
+			WHILE I < J DO
+				SET OutputRoot.*[I] = InputRoot.*[I];
+				SET I = I + 1;
+			END WHILE;
+		END;
+
+		CREATE PROCEDURE CopyEntireMessage() BEGIN
+			SET OutputRoot = InputRoot;
+		END;
+	END MODULE;

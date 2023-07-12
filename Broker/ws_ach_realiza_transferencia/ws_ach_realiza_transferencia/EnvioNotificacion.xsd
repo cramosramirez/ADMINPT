@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://tempuri.org/">
+  <xsd:element ibmSchExtn:docRoot="true" name="EnvioSMS">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="idServicio" type="xsd:int"/>
+        <xsd:element minOccurs="0" name="canal" type="xsd:int"/>
+        <xsd:element minOccurs="0" name="telefono" nillable="true" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="contenido" nillable="true" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="EnvioSMSResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="EnvioSMSResult" nillable="true" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="MotorEnvioSms">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="telefono" nillable="true" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="contenido" nillable="true" type="xsd:string"/>
+        <xsd:element minOccurs="0" name="key" nillable="true" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="MotorEnvioSmsResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" name="MotorEnvioSmsResult" nillable="true" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

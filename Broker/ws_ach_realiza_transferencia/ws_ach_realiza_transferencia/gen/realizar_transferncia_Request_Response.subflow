@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmJavaCompute.msgnode="ComIbmJavaCompute.msgnode" xmlns:ComIbmMSLMapping.msgnode="ComIbmMSLMapping.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_valida_maximo_montos_emp_ws_ach_valida_parametros_emp_1_realizar_transferncia_Request_Response.subflow="gen/valida_maximo_montos_emp_ws_ach_valida_parametros_emp_1_realizar_transferncia_Request_Response.subflow"
+    xmlns:gen_validar_maximo_montos_ws_ach_valida_parametros_1_realizar_transferncia_Request_Response.subflow="gen/validar_maximo_montos_ws_ach_valida_parametros_1_realizar_transferncia_Request_Response.subflow" xmlns:gt_com_banrural_www_ControladorErrores_SubFlow.subflow="gt/com/banrural/www/ControladorErrores_SubFlow.subflow" xmlns:gt_com_banrural_www_GrabaLog_SubFlow.subflow="gt/com/banrural/www/GrabaLog_SubFlow.subflow" xmlns:gt_com_banrural_www_ValidaToken_LoginTrn.subflow="gt/com/banrural/www/ValidaToken_LoginTrn.subflow"
+    xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="gen/realizar_transferncia_Request_Response.subflow" nsPrefix="gen_realizar_transferncia_Request_Response.subflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" useDefaults="true" udpSupport="true">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="realizar_transferncia_Request_Response" bundleName="gen/realizar_transferncia_Request_Response" pluginId="ws_ach_realiza_transferencia"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/ws_ach_realiza_transferencia/icons/full/obj16/realizar_transferncia_Request_Response.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/ws_ach_realiza_transferencia/icons/full/obj30/realizar_transferncia_Request_Response.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="-164,195">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="gen/realizar_transferncia_Request_Response" pluginId="ws_ach_realiza_transferencia"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="938,202">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="gen/realizar_transferncia_Request_Response" pluginId="ws_ach_realiza_transferencia"/>
+      </nodes>
+      <nodes xmi:type="gt_com_banrural_www_GrabaLog_SubFlow.subflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="-38,196" TipoNodoOrigen="Input" NombreNodoOrigen="Input" ConfigManual="true" Proyecto="ACH" Servicio="ws_ach_realiza_transferencia" Metodo="realiza_transferencia">
+        <translation xmi:type="utility:ConstantString" string="GrabaLog_SubFlow"/>
+      </nodes>
+      <nodes xmi:type="gt_com_banrural_www_ValidaToken_LoginTrn.subflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="747,83" Transaccion="18720">
+        <translation xmi:type="utility:ConstantString" string="ValidaToken_LoginTrn"/>
+      </nodes>
+      <nodes xmi:type="gt_com_banrural_www_ControladorErrores_SubFlow.subflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="405,400">
+        <translation xmi:type="utility:ConstantString" string="ControladorErrores_SubFlow"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output1" location="945,337">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.error" bundleName="gen/realizar_transferncia_Request_Response" pluginId="ws_ach_realiza_transferencia"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="148,196" dataSource="cobis" computeExpression="esql://routine/gen#realizar_transferncia_Request_Response_Compute.Main">
+        <translation xmi:type="utility:ConstantString" string="subir datos a env"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="851,198" mappingExpression="msl://{gen}#realizar_transferncia_Request_Response_MapMsgCore">
+        <translation xmi:type="utility:ConstantString" string="MapMsgCore"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="643,400" computeExpression="esql://routine/gen#realizar_transferncia_Request_Response_deleteDataChar.Main">
+        <translation xmi:type="utility:ConstantString" string="deleteDataChar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="-107,195" computeExpression="esql://routine/gen#realizar_transferncia_Request_Response_in_comp.Main">
+        <translation xmi:type="utility:ConstantString" string="in_compute"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="244,197" computeExpression="esql://routine/gen#realizar_transferncia_Request_Response_Compute_valida_userType.Main">
+        <translation xmi:type="utility:ConstantString" string="valida_userType"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJavaCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="70,196" javaClass="gen.Realizar_transferncia_Request_Response_ValidacionIFT">
+        <translation xmi:type="utility:ConstantString" string="ValidacionIFT"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_17" location="166,336" computeExpression="esql://routine/gen#realizar_transferncia_Request_Response_TransformaError.Main">
+        <translation xmi:type="utility:ConstantString" string="TransformaError"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="319,82" computeExpression="esql://routine/gen#realizar_transferncia_Request_Response_Compute_UserEmp_ind.Main">
+        <translation xmi:type="utility:ConstantString" string="UserEmp_ind"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="370,142" mappingExpression="msl://{gen}#realizar_transferncia_Request_Response_mapToValidaLim">
+        <translation xmi:type="utility:ConstantString" string="MapValLimiteInd"/>
+      </nodes>
+      <nodes xmi:type="gen_validar_maximo_montos_ws_ach_valida_parametros_1_realizar_transferncia_Request_Response.subflow:FCMComposite_1" xmi:id="FCMComposite_1_6" location="466,146">
+        <translation xmi:type="utility:ConstantString" string="validar_maximo_montos_ind"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="631,154" computeExpression="esql://routine/gen#realizar_transferncia_Request_Response_obtenerRespVal.Main">
+        <translation xmi:type="utility:ConstantString" string="valRespInd"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="365,19" mappingExpression="msl://{gen}#realizar_transferncia_Request_Response_mapToValidaEmp">
+        <translation xmi:type="utility:ConstantString" string="MapValLimiteEmp"/>
+      </nodes>
+      <nodes xmi:type="gen_valida_maximo_montos_emp_ws_ach_valida_parametros_emp_1_realizar_transferncia_Request_Response.subflow:FCMComposite_1" xmi:id="FCMComposite_1_14" location="461,23">
+        <translation xmi:type="utility:ConstantString" string="valida_maximo_montos_emp"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_15" location="615,31" computeExpression="esql://routine/gen#realizar_transferncia_Request_Response_obtenerRespEmp.Main">
+        <translation xmi:type="utility:ConstantString" string="ValidaRespEmp"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.Output1" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_18" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_20" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_21" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_22" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_23" targetNode="OutTerminal.Output1" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_7" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_31" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.alternate" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_32" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_33" targetNode="OutTerminal.Output1" sourceNode="FCMComposite_1_17" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_30" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_35" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_24" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.validar_maximo_montos_response" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="FCMComposite_1_14" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_19" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_25" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_26" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_27" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.valida_maximo_montos_empResponse" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_28" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_29" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_34" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

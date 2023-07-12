@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:Q1="http://www.cysce.com/esb/esbcore/v2/header" xmlns:Q2="http://ws_ach_realiza_transferencia">
+    <xsd:include schemaLocation="msgPayCorp_realizarTransferencia.xsd"></xsd:include>
+    <xsd:import schemaLocation="../ws_ach_realiza_transferencia_InlineSchema1.xsd" namespace="http://ws_ach_realiza_transferencia"></xsd:import>
+    <xsd:import schemaLocation="esbHeader.xsd" namespace="http://www.cysce.com/esb/esbcore/v2/header"></xsd:import>
+    <xsd:element name="msgCore_realizarTransaccion"
+    	type="msgCore_realizarTransaccionType">
+    </xsd:element>
+    
+
+    <xsd:complexType name="msgCore_realizarTransaccionType">
+    	<xsd:sequence>
+    		<xsd:element name="InfoTrx" type="Q1:esbHdr"></xsd:element>
+    		<xsd:element name="data"
+    			type="Q2:data_realizar_transferencia">
+    		</xsd:element>
+    		<xsd:element name="datos_pc" type="msgPayCorp_realizaTransferenciaType"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

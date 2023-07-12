@@ -1,0 +1,119 @@
+
+
+CREATE COMPUTE MODULE CA_ACH_RealizarTransferencia001_REQ_getNombreProd
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		  CALL CopyEntireMessage();
+		  
+		  DECLARE ns211 NAMESPACE 'http://www.w3.org/2003/05/soap-envelope';
+		   
+		DECLARE cuenta CHARACTER  InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.OriginAccountNumber;
+		DECLARE id_institucion_fin  CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.FinancialInstitutionIdentification;
+		   DECLARE moneda   CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.moneda; 
+		   --celd 03 marzo 2022 
+		   DECLARE  transactionprocessing CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.TransactionProcessing;
+		   DECLARE transactiontype CHARACTER InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data.TransactionType;
+		     
+		   
+            DECLARE SQLState1                   CHARACTER;   
+        DECLARE SQLErrorText1            CHARACTER;   
+        DECLARE SQLCode1                 INTEGER;   
+        DECLARE SQLNativeError1    INTEGER;
+        DECLARE descripcion_error CHARACTER;  
+            DECLARE resultado                   BOOLEAN;   
+              
+            CALL sp_ach_info_producto('I',cuenta, transactionprocessing, transactiontype, Environment.RSetNombreProducto[]);
+             
+            SET SQLState1 = SQLSTATE;
+        SET SQLCode1 = SQLCODE;
+        SET SQLErrorText1 = SQLERRORTEXT;
+        SET SQLNativeError1 = SQLNATIVEERROR;
+            
+            IF (SQLNativeError1 <> 0) THEN                 
+                  CALL gt.com.banrural.www.obtiene_descripcion_error(SQLNativeError1 ,descripcion_error) into resultado;
+                  IF (descripcion_error <> '') THEN  
+                  SET Environment.Variables.DescError = '[' || CAST(SQLNativeError1 as CHARACTER) || '] ' || descripcion_error;
+                  ELSE
+                        SET Environment.Variables.DescError = '[' || CAST(SQLNativeError1 as CHARACTER) || '] ' || 'OCURRIO UN ERROR AL OBTENER NOMBRE DEL PRODUCTO BANCARIO';
+                  END IF; 
+                  PROPAGATE TO TERMINAL -1;
+                  RETURN FALSE;
+            ELSE
+                                    
+                  SET Environment.Variables.nombre_producto = Environment.RSetNombreProducto[1].nombre_producto;
+                  SET Environment.Variables.moneda           = Environment.RSetNombreProducto[1].moneda;
+                  SET Environment.Variables.producto         = Environment.RSetNombreProducto[1].producto; 
+                  
+                  
+              END IF;
+              
+              
+                 --ir a traer codigo verificador de institucion financiera 
+		   	   
+		   DECLARE queryDF CHARACTER;  
+		   		--outcerr inicio 220623
+		   		--se recupera el if_codigo_bic	
+				SET queryDF = 'select digito = if_digito_verificador, codigo_bic = if_codigo_bic ';	  		
+				--outcerr fin 220623
+				SET queryDF = queryDF || ' from ach_instituciones_financieras where if_identificacion = ';			
+				SET queryDF = queryDF || '''' || id_institucion_fin || ''''; 
+				SET queryDF = queryDF || 'and if_moneda = ''' || moneda || '''';
+				DECLARE SQLState2 			CHARACTER;   
+		        DECLARE SQLErrorText2 		CHARACTER;   
+		        DECLARE SQLCode2 			INTEGER;   
+		        DECLARE SQLNativeError2 	INTEGER;
+				
+				SET Environment.RSetCodVerif[] = PASSTHRU(queryDF);
+				
+				SET SQLState2 = SQLSTATE;
+		        SET SQLCode2 = SQLCODE;
+		        SET SQLErrorText2 = SQLERRORTEXT;
+		        SET SQLNativeError2 = SQLNATIVEERROR;
+				  
+				IF (SQLNativeError2 <> 0 OR Environment.RSetCodVerif[1].digito is null ) THEN         
+					 
+			  		SET Environment.Variables.DescError = 'No se pudo obtener el codigo verificador de institucion financiera'; 
+					propagate to terminal -1;
+					return false; 
+				        	               	
+	        	END IF;	
+			   	  
+			   	 
+			   	SET Environment.DatosInsfinanciera.digito_verif = Environment.RSetCodVerif[1].digito;    
+			   	
+			   	--outcerr inicio 220623
+			   	IF (Environment.RSetCodVerif[1].codigo_bic is null ) THEN  
+			  		SET Environment.Variables.DescError = 'No se pudo obtener el codigo bic de institucion financiera'; 
+					propagate to terminal -1;
+					return false;          	
+	        	END IF;	
+				SET Environment.Variables.CodigoBic = Environment.RSetCodVerif[1].codigo_bic;
+				--outcerr fin 220623
+		RETURN TRUE;
+	END;
+
+    CREATE PROCEDURE sp_ach_info_producto(
+    IN      i_operacion CHARACTER,
+    IN      i_cuenta    CHARACTER,
+    IN      i_transaction_processing    CHARACTER,
+    IN      i_transaction_type    CHARACTER 
+    )
+    LANGUAGE DATABASE       
+    DYNAMIC RESULT SETS 1
+    EXTERNAL NAME "dbo.sp_ach_info_producto";
+    
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

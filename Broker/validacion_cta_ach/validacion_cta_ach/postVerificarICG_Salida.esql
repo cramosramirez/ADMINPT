@@ -1,0 +1,94 @@
+CREATE COMPUTE MODULE postVerificarICG_Salida
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DELETE FIELD OutputRoot.HTTPRequestHeader;
+        DELETE FIELD OutputRoot.HTTPResponseHeader;
+        DELETE FIELD Environment.Variables;
+        
+        DECLARE nombre CHARACTER;
+        DECLARE longitud INTEGER;
+        DECLARE hit BOOLEAN;
+        DECLARE found BOOLEAN;
+        DECLARE status CHARACTER;        
+               
+		DECLARE tramaDescrifada CHAR InputRoot.XMLNSC.ns:consultarCuentaTerceroResponse.ns:consultarCuentaTerceroResult;
+		
+		CREATE LASTCHILD OF Environment.Variables DOMAIN ('JSON') PARSE (LOWER(tramaDescrifada) CCSID 1208); 
+		
+        IF (Environment.Variables.JSON.Data.error is null)THEN
+            DELETE FIELD OutputRoot.JSON;
+            SET hit = CAST(Environment.Variables.JSON.Data.payload.hit AS BOOLEAN);
+            SET found = CAST(Environment.Variables.JSON.Data.payload.found AS BOOLEAN);
+            SET status = UPPER(CAST(Environment.Variables.JSON.Data.payload.status AS CHARACTER)); 
+            
+                   
+            IF hit = true THEN 
+            	SET OutputRoot.JSON.Data.status  = 401;           	
+        		SET OutputRoot.JSON.Data.message  = 'Cuenta destino no disponible';  
+        		SET OutputRoot.JSON.Data.name = '';      		
+            ELSE            	
+            	IF found = true THEN  
+            		SET OutputRoot.JSON.Data.status  = 200; 
+            		SET OutputRoot.JSON.Data.message  = LOWER(CAST(Environment.Variables.JSON.Data.payload.found AS CHARACTER));
+        			SET OutputRoot.JSON.Data.name = CAST(Environment.Variables.JSON.Data.payload.name AS CHARACTER);
+            	ELSE        
+            		SET OutputRoot.JSON.Data.status  = 401;    		
+        			CASE status
+            			WHEN 'CAN' THEN
+					    	SET OutputRoot.JSON.Data.message  = 'Cuenta destino cancelada';            			
+						WHEN 'ERR' THEN
+					    	SET OutputRoot.JSON.Data.message  = 'Cuenta destino incorrecta';					  	
+					  	WHEN 'INC' THEN
+					    	SET OutputRoot.JSON.Data.message  = 'Cuenta destino inactiva';
+					  	WHEN 'BLOC' THEN
+					    	SET OutputRoot.JSON.Data.message  = 'Cuenta destino bloqueada';
+					    WHEN 'EMB' THEN
+					    	SET OutputRoot.JSON.Data.message  = 'Cuenta destino embargada';
+					    WHEN 'DMY' THEN
+					    	SET OutputRoot.JSON.Data.message  = 'Banco receptor no responde';
+						ELSE
+							SET OutputRoot.JSON.Data.message  = 'Cuenta destino no valida';
+					END CASE;
+					SET OutputRoot.JSON.Data.name = ''; 
+            	END IF;            	
+            END IF;
+        ELSE 
+        	DELETE FIELD OutputRoot.JSON;
+	        SET OutputRoot.JSON.Data.status  = 200;
+	        SET OutputRoot.JSON.Data.message  = 'true';
+	        SET OutputRoot.JSON.Data.name  = '';			
+        END IF; 
+        
+        -- DATOS PARA ESB_LOGGING 
+        DELETE FIELD Environment.Variables.JSON;
+        SET Environment.Variables.JSON.Data = OutputRoot.JSON.Data;
+        
+        SET OutputRoot.XMLNSC.Datos = OutputRoot.JSON.Data;   
+		DECLARE xmlAsBlob BLOB ASBITSTREAM(OutputRoot.XMLNSC CCSID 1208);   
+        DECLARE xmlAsChar CHARACTER CAST(xmlAsBlob AS CHARACTER CCSID 1208);  
+        SET Environment.Variables.ESBLogging.reintento = 0;
+		SET Environment.Variables.ESBLogging.trn_cobis = 18696; --codigo de transaccion
+		SET Environment.Variables.ESBLogging.TramaResp  = xmlAsChar;  
+		DELETE FIELD OutputRoot.XMLNSC;
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+

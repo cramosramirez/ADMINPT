@@ -1,0 +1,48 @@
+BROKER SCHEMA gen
+
+
+CREATE COMPUTE MODULE ws_ach_realiza_transferencia_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		
+					DECLARE codigo  CHARACTER;	
+		DECLARE descripcion  CHARACTER;	
+		SET Environment.Service.Operation.Name = 'realizar_transferencia'; 
+				
+		DECLARE NS3 NAMESPACE 'http://ws_ach_realiza_transferencia';
+		DECLARE NS1 NAMESPACE 	'http://www.w3.org/2003/05/soap-envelope';	
+				
+		set codigo = InputRoot.XMLNSC.NS1:Envelope.NS1:Body.realizar_transferencia.resultado.codigo;
+		set descripcion = InputRoot.XMLNSC.NS1:Envelope.NS1:Body.realizar_transferencia.resultado.descripcion;
+				
+		if (codigo is null) then     
+			 	set codigo = InputRoot.XMLNSC.NS1:Envelope.NS1:Body.CA.resultado.codigo;
+				set descripcion = InputRoot.XMLNSC.NS1:Envelope.NS1:Body.CA.resultado.descripcion;
+		end if;
+		  
+			-- SET Environment.Variables.consulta_tipo_linea = InputRoot.XMLNSC.NS1:Envelope.NS1:Body.NS3:consulta_tipo_lineaResponse.tipos_linea;  
+			
+			 SET OutputRoot.XMLNSC.NS3:realizar_transfernciaResponse.resultado.codigo = codigo;
+			 SET OutputRoot.XMLNSC.NS3:realizar_transfernciaResponse.resultado.descripcion = descripcion; 
+-- 			 SET OutputRoot.XMLNSC.crear_originador.datos = InputRoot.XMLNSC.NS1:Envelope.NS1:Body.consulta_estado_originador.datos; 
+			 
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

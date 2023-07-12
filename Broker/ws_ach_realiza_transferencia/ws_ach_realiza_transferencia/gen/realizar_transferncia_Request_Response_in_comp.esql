@@ -1,0 +1,29 @@
+BROKER SCHEMA gen
+
+
+CREATE COMPUTE MODULE realizar_transferncia_Request_Response_in_comp
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		  CALL CopyEntireMessage();
+		  
+		  SET Environment.Service.Operation.Name = 'realizar_transferencia'; 
+		  SET Environment.Variables.mis_valida_ift = InputRoot.XMLNSC.ns:realizar_transferncia.data.mis;
+		  SET Environment.Variables.traPro_valida_ift = InputRoot.XMLNSC.ns:realizar_transferncia.data.TransactionProcessing;
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

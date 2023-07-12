@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!--File ws_ach_valida_parametros_InlineSchema1.xsd, application ws_ach_valida_parametros--><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ws_ach_valida_parametros" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://ws_ach_valida_parametros" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <xsd:element ibmSchExtn:docRoot="true" name="validar_maximo_cuentas" type="tns:request_validar_maximo_cuentas"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="validar_maximo_cuentas_response" type="tns:response_validar_maximo_cuentas"/>
+  <xsd:complexType name="resultado">
+    <xsd:sequence>
+      <xsd:element name="codigo" type="xsd:string"/>
+      <xsd:element name="descripcion" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="request_validar_maximo_cuentas">
+    <xsd:sequence>
+      <xsd:element name="login" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:attribute name="NewAttribute" type="xsd:string"/>
+  <xsd:complexType name="datos_validar_maximo_cuentas">
+    <xsd:sequence>
+      <xsd:element name="descripcion" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="response_validar_maximo_cuentas">
+    <xsd:sequence>
+      <xsd:element name="resultado" type="tns:resultado"/>
+      <xsd:element name="datos" type="tns:datos_validar_maximo_cuentas"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element ibmSchExtn:docRoot="true" name="validar_maximo_montos" nillable="true" type="tns:request_validar_maximo_montos"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="validar_maximo_montos_response" nillable="true" type="tns:response_validar_maximo_montos"/>
+  <xsd:complexType name="request_validar_maximo_montos">
+    <xsd:sequence>
+      <xsd:element name="login" type="xsd:string"/>
+      <xsd:element name="monto" type="xsd:decimal"/>
+      <xsd:element name="moneda" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="datos_validar_maximo_montos">
+    <xsd:sequence>
+      <xsd:element name="token" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="response_validar_maximo_montos">
+    <xsd:sequence>
+      <xsd:element name="resultado" type="tns:resultado"/>
+      <xsd:element name="datos" type="tns:datos_validar_maximo_montos"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

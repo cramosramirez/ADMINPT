@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="msgPayCorp_realizarTransferencia"
+    	type="msgPayCorp_realizaTransferenciaType">
+    </xsd:element>
+    
+
+    <xsd:complexType name="msgPayCorp_realizaTransferenciaType">
+    	<xsd:sequence>
+    		<xsd:element name="OriginatorIdentification"
+    			type="xsd:string">
+    		</xsd:element>
+    		<xsd:element name="CreateParticipantIfNotExist"
+    			type="xsd:boolean">
+    		</xsd:element>
+    		<xsd:element name="Transactions" type="Transactions" maxOccurs="unbounded" minOccurs="1"></xsd:element>
+    		<xsd:element name="OriginAccountNumber" type="xsd:string"></xsd:element>
+    		<xsd:element name="OriginAccountType" type="xsd:int"></xsd:element>
+    		<xsd:element name="TransactionType" type="xsd:int"></xsd:element>
+    		<xsd:element name="TransactionProcessing"
+    			type="xsd:string">
+    		</xsd:element>
+    		<xsd:element name="AccountStandard" type="xsd:int"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Participant">
+    	<xsd:sequence>
+    		<xsd:element name="ParticipantName" type="xsd:string"></xsd:element>
+    		<xsd:element name="ParticipantIdentification"
+    			type="xsd:string">
+    		</xsd:element>
+    		<xsd:element name="Account" type="Account"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Account">
+    	<xsd:sequence>
+    		<xsd:element name="FinancialInstitutionIdentification"
+    			type="xsd:string">
+    		</xsd:element>
+    		<xsd:element name="AccountNumber" type="xsd:string"></xsd:element>
+    		<xsd:element name="AccountType" type="xsd:int"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Transactions">
+    	<xsd:sequence>
+    		<xsd:element name="Participant" type="Participant"></xsd:element>
+    		<xsd:element name="Amount" type="xsd:decimal"></xsd:element>
+    		<xsd:element name="TransactionType" type="xsd:int"></xsd:element>
+    		<xsd:element name="Description" type="xsd:string"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

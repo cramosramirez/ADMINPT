@@ -1,0 +1,87 @@
+
+
+CREATE COMPUTE MODULE CA_ACH_RealizarTransferencia001_REQ_setURLasoc
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		  CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		 
+		
+		DECLARE ns211 NAMESPACE 'http://www.w3.org/2003/05/soap-envelope';
+		DECLARE url CHARACTER;
+		DECLARE operacion CHARACTER 'URL';
+		DECLARE nemonico CHARACTER;
+		DECLARE ip_rest CHARACTER;  
+		DECLARE api_key CHARACTER; 
+		DECLARE indice INTEGER; 
+		DECLARE nom_prod CHARACTER Environment.Variables.nombre_producto; 
+		DECLARE metodo name  Environment.Service.Operation.Name; -- nombre del método invocado
+		
+        
+        DECLARE cuenta CHARACTER;
+        DECLARE moneda CHARACTER;
+        DECLARE tipo CHARACTER;
+        DECLARE banco CHARACTER;
+        
+        SET cuenta = Environment.Variables.AccountNumber;
+        SET moneda = Environment.Variables.AccountMoneda;
+        SET tipo = Environment.Variables.TipoCuentaValidacion;
+        SET banco = Environment.Variables.CodigoBic;
+        
+		/*INICIO SUBIR VALRES A ARBOL*/
+		set Environment.DatosBitacora = InputRoot.XMLNSC.ns211:Envelope.ns211:Body.msgCore_realizarTransaccion.data;
+		/*FIN SUBIR VALRES A ARBOL*/	
+			
+		--determinar a que instancia se va a consultar  
+		SET nemonico = 'ACHVALCTA';
+				   
+		CALL sp_aap_busca_ptos_servicio(operacion, 0, 0, 0, 0, 0.0, 0.0, 0.0, '', nemonico, ip_rest, Environment.ResultSet[]);
+               								
+		SET url = ip_rest;
+ 		--SET OutputRoot.HTTPRequestHeader."API_KEY" = api_key; 		  
+        SET OutputRoot.HTTPRequestHeader."Content-Type" = 'application/json';              
+        SET OutputRoot.JSON.Data.cuenta = cuenta;        
+        SET OutputRoot.JSON.Data.moneda = moneda;           
+        SET OutputRoot.JSON.Data.tipo = tipo;  
+        SET OutputRoot.JSON.Data.banco = banco;         
+        -------------------------------------------------          
+        -------------------------------------------------- 
+        SET OutputRoot.Properties.CodedCharSetId = 1208; 
+		SET OutputRoot.HTTPRequestHeader."X-Original-HTTP-URL" = url;
+  		DELETE FIELD OutputRoot.HTTPInputHeader;
+  		
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE sp_aap_busca_ptos_servicio(
+    IN	i_operacion				CHARACTER,
+    IN  i_departamento          INTEGER,
+    IN  i_municipio             INTEGER,
+    IN  i_codigo                INTEGER,
+    IN  i_zona                  INTEGER,
+    IN 	i_latitud               DECIMAL,
+    IN 	i_longitud              DECIMAL,
+    IN 	i_radio                 DECIMAL,
+    IN 	i_tipo                  CHARACTER,
+    IN 	i_nemonico              CHARACTER,
+    INOUT o_url                 CHARACTER
+    )
+    LANGUAGE DATABASE       
+    DYNAMIC RESULT SETS 1
+    EXTERNAL NAME "dbo.sp_aap_busca_ptos_servicio";
+    
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

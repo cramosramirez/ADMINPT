@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="EnvioNotificaciones" targetNamespace="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="BasicHttpBinding_IEnvioNotificacion" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+<xsd:import namespace="http://tempuri.org/" schemaLocation="EnvioNotificacion.xsd"/>
+<xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="EnvioNotificacion_1.xsd"/>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IEnvioNotificacion_EnvioSMS_InputMessage">
+    <wsdl:part element="tns:EnvioSMS" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IEnvioNotificacion_EnvioSMS_OutputMessage">
+    <wsdl:part element="tns:EnvioSMSResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IEnvioNotificacion_MotorEnvioSms_InputMessage">
+    <wsdl:part element="tns:MotorEnvioSms" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IEnvioNotificacion_MotorEnvioSms_OutputMessage">
+    <wsdl:part element="tns:MotorEnvioSmsResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="IEnvioNotificacion">
+    <wsdl:operation name="EnvioSMS">
+      <wsdl:input message="tns:IEnvioNotificacion_EnvioSMS_InputMessage" wsaw:Action="http://tempuri.org/IEnvioNotificacion/EnvioSMS"/>
+      <wsdl:output message="tns:IEnvioNotificacion_EnvioSMS_OutputMessage" wsaw:Action="http://tempuri.org/IEnvioNotificacion/EnvioSMSResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="MotorEnvioSms">
+      <wsdl:input message="tns:IEnvioNotificacion_MotorEnvioSms_InputMessage" wsaw:Action="http://tempuri.org/IEnvioNotificacion/MotorEnvioSms"/>
+      <wsdl:output message="tns:IEnvioNotificacion_MotorEnvioSms_OutputMessage" wsaw:Action="http://tempuri.org/IEnvioNotificacion/MotorEnvioSmsResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IEnvioNotificacion" type="tns:IEnvioNotificacion">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="EnvioSMS">
+      <soap:operation soapAction="http://tempuri.org/IEnvioNotificacion/EnvioSMS" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MotorEnvioSms">
+      <soap:operation soapAction="http://tempuri.org/IEnvioNotificacion/MotorEnvioSms" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EnvioNotificaciones">
+    <wsdl:port binding="tns:BasicHttpBinding_IEnvioNotificacion" name="BasicHttpBinding_IEnvioNotificacion">
+      <soap:address location="http://140.254.1.16/WebServices/BancaMovil/ws_be_envio_notificaciones/EnvioNotificacion.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
